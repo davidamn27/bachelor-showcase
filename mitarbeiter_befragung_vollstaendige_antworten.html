@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auswertung Mitarbeiter-Befragung · vollständige Antworten</title>
+<style>
+:root{
+  --yellow:#f5c400;
+  --text:#f5f7fa;
+  --muted:rgba(245,247,250,.72);
+  --muted2:rgba(245,247,250,.55);
+  --bg:#020406;
+  --panel:rgba(7,12,17,.74);
+  --panel2:rgba(10,16,22,.56);
+  --line:rgba(255,255,255,.14);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#020406;color:var(--text);font-family:"Segoe UI",Arial,sans-serif}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.83),rgba(0,0,0,.48),rgba(0,0,0,.83)),
+    radial-gradient(circle at 70% 12%,rgba(245,196,0,.14),transparent 24%),
+    linear-gradient(135deg,#151b22,#020406 70%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  opacity:.55;
+}
+.page{width:min(1540px,calc(100vw - 56px));margin:0 auto;padding:34px 0 80px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:250px;height:auto;display:block;filter:drop-shadow(0 10px 22px rgba(0,0,0,.38))}
+.brand h1{margin:0;font-size:30px;letter-spacing:.09em}
+.brand small{display:block;color:var(--muted);font-style:italic;margin-top:-2px}
+.badge{background:var(--yellow);color:#111;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 0 32px rgba(245,196,0,.25)}
+.hero{display:grid;grid-template-columns:1.06fr .94fr;gap:26px;align-items:stretch;margin-bottom:28px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.46);backdrop-filter:blur(11px)}
+.intro{padding:38px}
+.kicker{color:var(--yellow);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:13px;margin-bottom:12px}
+.title{font-size:clamp(42px,5vw,72px);line-height:.96;margin:0 0 18px;text-transform:uppercase;letter-spacing:.035em}
+.subtitle{font-size:20px;color:var(--muted);line-height:1.5;max-width:820px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
+.stat strong{display:block;color:var(--yellow);font-size:38px;line-height:1}
+.stat span{display:block;color:var(--muted);font-weight:700;margin-top:8px}
+.controls{padding:28px;display:grid;gap:16px}
+.search{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:13px;color:var(--text);padding:15px 16px;font-size:16px;outline:none}
+.mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.mini-card{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04);padding:14px}
+.mini-card strong{display:block;color:var(--text);line-height:1.35}
+.mini-card span{display:block;color:var(--muted2);font-size:13px;margin-top:6px}
+.section-title{display:flex;align-items:center;gap:16px;margin:38px 0 16px}
+.section-title h2{margin:0;color:var(--yellow);letter-spacing:.12em;text-transform:uppercase;font-size:20px}
+.section-title::after{content:"";height:1px;background:rgba(255,255,255,.24);flex:1}
+.theme-row{display:grid;grid-template-columns:210px 1fr 42px;gap:14px;align-items:center;margin:14px 0}
+.theme-row span{font-weight:800;color:var(--text)}
+.theme-track{height:16px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.theme-fill{height:100%;background:linear-gradient(90deg,var(--yellow),#ffe681);border-radius:999px}
+.theme-row b{color:var(--yellow)}
+.question-block{
+  background:rgba(7,12,17,.68);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:26px;
+  margin-bottom:22px;
+  box-shadow:0 18px 70px rgba(0,0,0,.34);
+  backdrop-filter:blur(10px);
+}
+.question-head{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:start;margin-bottom:20px}
+.q-number{width:54px;height:54px;border-radius:15px;background:var(--yellow);color:#111;display:grid;place-items:center;font-size:22px;font-weight:900}
+.question-head h3{margin:0;font-size:22px;line-height:1.35;color:var(--text)}
+.answers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.answer-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:18px 20px}
+.answer-card h4{margin:0 0 12px;color:var(--yellow);font-size:17px;line-height:1.35}
+.answer-text{
+  color:rgba(245,247,250,.86);
+  font-size:15px;
+  line-height:1.55;
+  white-space:pre-wrap;
+  overflow:visible;
+  max-height:none;
+}
+.footer{margin-top:24px;color:rgba(245,247,250,.50);font-size:13px}
+.hidden{display:none!important}
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .answers-grid{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr}
+  .page{width:calc(100vw - 28px)}
+  .theme-row{grid-template-columns:150px 1fr 40px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">
+      <img class="logo" src="assets/logos/kramer-logo.svg?v=kramer-logo-03" alt="Kramer on the safe side">
+    </div>
+    <div class="badge">Mitarbeiter-Befragung · vollständige Antworten</div>
+  </header>
+
+  <section class="hero">
+    <div class="panel intro">
+      <div class="kicker">Analysephase · Experteninterviews</div>
+      <h1 class="title">Mitarbeiter-<br>Befragung</h1>
+      <p class="subtitle">
+        Diese HTML übernimmt die Antworten vollständig aus der Excel-Datei. Es werden keine Antworten gekürzt und keine Satzenden künstlich mit „…“ abgebrochen.
+      </p>
+      <div class="stats">
+        <div class="stat"><strong>19</strong><span>Fragen</span></div>
+        <div class="stat"><strong>5</strong><span>Interviewgruppen</span></div>
+        <div class="stat"><strong>95</strong><span>Antwortblöcke</span></div>
+        <div class="stat"><strong>804</strong><span>max. Zeichen</span></div>
+      </div>
+    </div>
+    <div class="panel controls">
+      <div class="kicker">Suchen</div>
+      <input class="search" id="search" placeholder="Suche in Fragen und vollständigen Antworten ..." />
+      <div class="kicker" style="margin-top:8px">Interviewgruppen</div>
+      <div class="mini-grid"><div class="mini-card"><strong>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</strong><span>Interviewgruppe 1</span></div><div class="mini-card"><strong>Maik Lohrey / Aleixei Buth</strong><span>Interviewgruppe 2</span></div><div class="mini-card"><strong>Hubert Dabbelt / Matthias Löffler</strong><span>Interviewgruppe 3</span></div><div class="mini-card"><strong>Yannik Stephan / Jürgen Auer</strong><span>Interviewgruppe 4</span></div><div class="mini-card"><strong>Daniel Wörner / Daniel Sessler</strong><span>Interviewgruppe 5</span></div></div>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Häufige Themen</h2></div>
+  <div class="panel intro"><div class="theme-row">
+          <span>Systeme / Tools</span>
+          <div class="theme-track"><div class="theme-fill" style="width:100.0%"></div></div>
+          <b>77</b>
+        </div><div class="theme-row">
+          <span>Status / Reifegrad</span>
+          <div class="theme-track"><div class="theme-fill" style="width:40.3%"></div></div>
+          <b>31</b>
+        </div><div class="theme-row">
+          <span>Medienbrüche / manuell</span>
+          <div class="theme-track"><div class="theme-fill" style="width:36.4%"></div></div>
+          <b>28</b>
+        </div><div class="theme-row">
+          <span>Versionierung / Change-Log</span>
+          <div class="theme-track"><div class="theme-fill" style="width:35.1%"></div></div>
+          <b>27</b>
+        </div><div class="theme-row">
+          <span>Zuständigkeiten / Rechte</span>
+          <div class="theme-track"><div class="theme-fill" style="width:27.3%"></div></div>
+          <b>21</b>
+        </div></div>
+
+  <div class="section-title"><h2>Alle Fragen & vollständige Antworten</h2></div>
+  <div id="questions">
+    
+    <section class="question-block" data-question="1 welche rolle (entwickeln, validieren, testen) haben sie im umgang mit software oder parametersätzen? •	validieren und testen (vector, kadias, usw herstellertools)
+•	verstellung der parameter → anpassung aus testzwecken •	parametersätze in das diagnosetool in das kadias programm einpflegen •	entwickeln, validieren und test 
+•	softwareanpassungen → falls nötig •	prüfstands betreuung, software /digitalisierung in der produktion (scanner, usw.)  und parametermanagement in der produktion •	softwareerstellung (iterativ), parameterdatensätze
+•	wie erstellen wir die datensätze, welche struktur haben diese? (entwicklungsprozess)  
+•	betreuung entwicklung bis hin zur übergabe / ablage zur produktion und serie-fahrzeuge (software / parameter auf stand zu halten → updates und chang-logs zu pflegen  
+•	auftragserstellung für validierungsabteilung 
+•	aktuell gibt es keinen prozess wie das ganze ablaufen soll 
+•	konkrete rolle: entwickeln und testen">
+      <div class="question-head">
+        <div class="q-number">01</div>
+        <h3>Welche Rolle (entwickeln, validieren, testen) haben Sie im Umgang mit Software oder Parametersätzen?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Validieren und Testen (Vector, Kadias, usw Herstellertools)
+•	Verstellung der Parameter → Anpassung aus Testzwecken</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Parametersätze in das Diagnosetool in das Kadias Programm einpflegen</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Entwickeln, Validieren und Test 
+•	Softwareanpassungen → falls nötig</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Prüfstands Betreuung, Software /Digitalisierung in der Produktion (Scanner, usw.)  und Parametermanagement in der Produktion</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Softwareerstellung (Iterativ), Parameterdatensätze
+•	Wie erstellen wir die Datensätze, welche Struktur haben diese? (Entwicklungsprozess)  
+•	Betreuung Entwicklung bis hin zur Übergabe / Ablage zur Produktion und Serie-Fahrzeuge (Software / Parameter auf Stand zu halten → Updates und Chang-Logs zu pflegen  
+•	Auftragserstellung für Validierungsabteilung 
+•	Aktuell gibt es keinen Prozess wie das ganze Ablaufen soll 
+•	Konkrete Rolle: Entwickeln und testen</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="2 wie erhalten sie aktuell zugriff auf parametersätze? wie werden diese für sie  bereitgestellt? •	wird von einem e und e mitarbeiter bereitgestellt (laufwerk oder mail) 
+•	ungesicherte kommunikation •	e und e → e-mail und laufwerk (info e und e mitarbeiter) •	seriendatensätze → laufwerke (bei bestehenden projekten) 
+•	neue projekt: entwicklung von standarddatensätzen •	sap →materialnummer des parameterdatensatz 
+•	ordnerstruktur auf dem laufwerk 
+•	kommunikation mit der e und e abteilung 
+•	confluence-seite → hier wird dokumentiert, beispielsweise e und e -mitarbeiter gibt für produktion die parameterdatensätze frei und auch andersherum (übersichtlich für beide seiten → eigenständig) •	e und e erstellen die datensätze → in der wacker-neuson spezifischen struktur 
+•	basis: export des kompletten parameterdatensatzes aus dem entwicklertools → notwendig für die erstellung (hydac, bosch)">
+      <div class="question-head">
+        <div class="q-number">02</div>
+        <h3>Wie erhalten Sie aktuell Zugriff auf Parametersätze? Wie werden diese für Sie  bereitgestellt?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Wird von einem E und E Mitarbeiter bereitgestellt (Laufwerk oder Mail) 
+•	Ungesicherte Kommunikation</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	E Und E → E-Mail und Laufwerk (Info E Und E Mitarbeiter)</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Seriendatensätze → Laufwerke (Bei bestehenden Projekten) 
+•	Neue Projekt: Entwicklung von Standarddatensätzen</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	SAP →Materialnummer des Parameterdatensatz 
+•	Ordnerstruktur auf dem Laufwerk 
+•	Kommunikation mit der E und E Abteilung 
+•	Confluence-Seite → hier wird dokumentiert, beispielsweise E und E -Mitarbeiter gibt für Produktion die Parameterdatensätze frei und auch andersherum (Übersichtlich für beide Seiten → Eigenständig)</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	E und E erstellen die Datensätze → in der Wacker-Neuson spezifischen Struktur 
+•	Basis: Export des kompletten Parameterdatensatzes aus dem Entwicklertools → notwendig für die Erstellung (Hydac, Bosch)</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="3 1.    in welchem format liegen die parametersätze vor (dateiformat)? erfolgt durch sie eine umwandlung der parametersätze in eine anderes dateiformat? gibt es eine einheitliche nomenklatur (namensgebung) (1000341158_08_1000455864_02_40km/h_10mboom_work)? •	xml-dateiformat, dana bms
+•	arbeitsvorgänge xml → vergleichen, test 
+•	keine einheitliche nomenklatur → displaydatensätze habe z.b. kein d zur kennzeichnung  
+•	datensätze aktuell haben nur die sap-nummer und den index zur herstellung der beziehung aktuell •	wacker-neuson xml-format → notwendig für alle steuergeräte 
+•	hydac mst-export → umwandlung durch pythonscript •	entwicklung: xml-datensätze entsprechend der hersteller → spezifisch 
+•	umwandlung mit der e und e zusammen → wacker-neuson datenstruktur durch eine excel → umwandlung •	anpassung in einem xml-format 
+•	aufspielen wacker-neuson-format → produktionsseitig •	in der regel xml-datei → lieferanten spezifisch (unterschiedlich bosch / hydac)
+•	kadias / unternehmentools --&lt; benötigen xlm-wacker-neuson struktur, sodass mit diesen gearbeitet werden kann → diese haben den identischen aufbau
+•	möglich: bosch liefert eine epr-datei → wie erstelle ich eine wacker neuson struktur die alle notwendigen inhalte hat">
+      <div class="question-head">
+        <div class="q-number">03</div>
+        <h3>1.    In welchem Format liegen die Parametersätze vor (Dateiformat)? Erfolgt durch Sie eine Umwandlung der Parametersätze in eine anderes Dateiformat? Gibt es eine einheitliche Nomenklatur (Namensgebung) (1000341158_08_1000455864_02_40km/h_10mBoom_WORK)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	XML-Dateiformat, Dana BMS
+•	Arbeitsvorgänge XML → Vergleichen, Test 
+•	Keine einheitliche Nomenklatur → Displaydatensätze habe z.B. kein D zur Kennzeichnung  
+•	Datensätze aktuell haben nur die SAP-Nummer und den INDEX zur Herstellung der Beziehung aktuell</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Wacker-Neuson XML-Format → notwendig für alle Steuergeräte 
+•	Hydac MST-Export → Umwandlung durch Pythonscript</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Entwicklung: XML-Datensätze entsprechend der Hersteller → spezifisch 
+•	Umwandlung mit der E und E zusammen → Wacker-Neuson Datenstruktur Durch eine Excel → Umwandlung</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Anpassung in einem XML-Format 
+•	Aufspielen Wacker-Neuson-Format → Produktionsseitig</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	In der Regel XML-Datei → Lieferanten spezifisch (Unterschiedlich Bosch / Hydac)
+•	Kadias / Unternehmentools --&lt; benötigen XLM-Wacker-Neuson Struktur, sodass mit diesen gearbeitet werden kann → diese haben den identischen Aufbau
+•	Möglich: Bosch liefert eine EPR-Datei → Wie erstelle ich eine Wacker Neuson Struktur die alle notwendigen Inhalte hat</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="4 wie wird sichergestellt, dass der richtige parametersatz zum richtigen fahrzeug / zur richtigen software verwendet wird? •	eigenständiges wissen der mitarbeiter, diese stellen sicher, dass das richtig umgesetzt wird.  
+•	bestenfalls wird das im kadias hinterlegt/eingepflegt (mitarbeiter) und kann dort dann kontrolliert werden ob der richtige datensatz zur richtigen maschine passt
+•	ist nicht direkt in der bezeichnung in der kopfzeile z.b. ersichtlich •	abgleich mit kadias: tabelle in kadias enthält die beschreibungen zum richtigen fahrzeug → vin, bauteile (motor) •	seriendatensätze automatisch über kadias 
+•	verwendung der entwicklertools → eigenverantwortung der mitarbeiter 
+•	aktueller stand. welcher softwarestand aktuelle auf dem fahrzeug ist (fahrzeugakte: historie, was, wann, wer geflasht hat → wenn die mitarbeiter das umsetzen. •	liegt in der hand der mitarbeiter → eigenverantwortung → saubere pflege (dadurch eben übersichtlichkeit) 
+•	gegenprüfung in der endabnahme über kadias → ist das die aktuell richtige software? 
+•	abgleich an den flashstationen •	aktuell: aus der entwicklungssicht → keine sicherstellung für das jeweilige endfahrzeug 
+•	aufgabe e und e: gibt nur die vorgabe → welcher datensatz zu welcher maschine gehört → hier sind die einzelnen teams (produktion / diagnoseteam) zuständig">
+      <div class="question-head">
+        <div class="q-number">04</div>
+        <h3>Wie wird sichergestellt, dass der richtige Parametersatz zum richtigen Fahrzeug / zur richtigen Software verwendet wird?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Eigenständiges Wissen der Mitarbeiter, diese stellen sicher, dass das richtig umgesetzt wird.  
+•	Bestenfalls wird das im Kadias hinterlegt/eingepflegt (Mitarbeiter) und kann dort dann kontrolliert werden ob der richtige Datensatz zur richtigen Maschine passt
+•	Ist nicht direkt in der Bezeichnung in der Kopfzeile z.B. ersichtlich</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Abgleich mit Kadias: Tabelle in Kadias enthält die Beschreibungen zum richtigen Fahrzeug → VIN, Bauteile (Motor)</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Seriendatensätze automatisch über Kadias 
+•	Verwendung der Entwicklertools → Eigenverantwortung der Mitarbeiter 
+•	Aktueller Stand. Welcher Softwarestand aktuelle auf dem Fahrzeug ist (Fahrzeugakte: Historie, was, wann, wer geflasht hat → wenn die Mitarbeiter das umsetzen.</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Liegt in der Hand der Mitarbeiter → Eigenverantwortung → saubere Pflege (dadurch eben Übersichtlichkeit) 
+•	Gegenprüfung in der Endabnahme über Kadias → ist das die aktuell richtige Software? 
+•	Abgleich an den Flashstationen</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Aktuell: Aus der Entwicklungssicht → keine Sicherstellung für das jeweilige Endfahrzeug 
+•	Aufgabe E und E: gibt nur die Vorgabe → welcher Datensatz zu welcher Maschine gehört → hier sind die einzelnen Teams (Produktion / Diagnoseteam) zuständig</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="5 welche schritte (ablauf) sind notwendig, bevor ein parametersatz eingesetzt oder geändert werden darf? •	versuchsauftrag → fahrzeugvalidierung testet → ergebnis: neues setting (nicht offiziell) → e und e muss dann einen offiziellen antrag erstellen 
+•	es gibt keine regeln: alles ist möglich •	bekommen datensätze von der e und e-abteilung vorgelegt •	arbeit vor der validierung → zeitgleich mit der entwicklung sodass ein fertiger datensatz rauskommt für die validierung 
+•	datensätze werden nach dem 4-augenprizip erstellt, nie einer allein zur sicherheit → je weiter das projekt fortgeschritten ist, mehr sicherheit nötig , diese sicherheit wird durch die verantwortung der mitarbeiter gestellt 
+•	definieren die parameter die geändert werden müssen
+•	nach erstellung des datensatzes kommt nochmal eine überprüfung, nicht das zusätzlich nochmal etwas anders drin / geändert worden ist. •	bekommen fertige softwareparameter von e und e 
+•	unberührte software → richtige software wird auf das richtige fahrzeug aufgespielt
+•	gewisse parameterdatensätze (gewissen parameter) müssen dann noch zusätzlich angepasst, verändert werden (optionsabhängig angepasst werden)
+•	anpassung nicht direkt in der produktionslinie •	serienstart: 1. erstellen des wacker-neuson spezifischen datensatz (automatisierte erstellung durch eine excel-datei, die aus der hersteller xml-datei → die wacker neuson struktur erstellt) 
+•	serienfahrzeug: 1. änderungen / parameteranpassung (entwicklung, versuch, service liefern hierfür gründe) hierzu muss die excel hergenommen werden und hier werden die änderungen gepflegt durch change-logs) → change-log erfordert die index erhöhung der datensätze 
+•	2. validierung der datensätze durch den versuch 
+•	3. freigabe der datensätze für die produktion als xml-datei (wacker-neuson) → sehen keine änderungen change-log
+•	excel-datei ist nur für alle datensätze aktuell vorhanden → ohne excel, wird auf der basis der hersteller xlm entwickelt und nach fertigstellung findet erst die umwandlung statt.">
+      <div class="question-head">
+        <div class="q-number">05</div>
+        <h3>Welche Schritte (Ablauf) sind notwendig, bevor ein Parametersatz eingesetzt oder geändert werden darf?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Versuchsauftrag → Fahrzeugvalidierung testet → Ergebnis: Neues Setting (nicht offiziell) → E und E muss dann einen offiziellen Antrag erstellen 
+•	Es gibt keine Regeln: alles ist möglich</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Bekommen Datensätze von der E und E-Abteilung vorgelegt</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Arbeit vor der Validierung → zeitgleich mit der Entwicklung sodass ein fertiger Datensatz rauskommt für die Validierung 
+•	Datensätze werden nach dem 4-Augenprizip erstellt, nie einer allein zur Sicherheit → je weiter das Projekt fortgeschritten ist, mehr Sicherheit nötig , diese Sicherheit wird durch die Verantwortung der Mitarbeiter gestellt 
+•	Definieren die Parameter die geändert werden müssen
+•	Nach Erstellung des Datensatzes kommt nochmal eine Überprüfung, nicht das zusätzlich nochmal etwas anders drin / geändert worden ist.</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Bekommen fertige Softwareparameter von E und E 
+•	Unberührte Software → richtige Software wird auf das richtige Fahrzeug aufgespielt
+•	Gewisse Parameterdatensätze (gewissen Parameter) müssen dann noch zusätzlich angepasst, verändert werden (Optionsabhängig angepasst werden)
+•	Anpassung nicht direkt in der Produktionslinie</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Serienstart: 1. Erstellen des Wacker-Neuson spezifischen Datensatz (Automatisierte Erstellung durch eine Excel-Datei, die aus der Hersteller XML-Datei → die Wacker Neuson Struktur erstellt) 
+•	Serienfahrzeug: 1. Änderungen / Parameteranpassung (Entwicklung, Versuch, Service liefern hierfür Gründe) hierzu muss die Excel hergenommen werden und hier werden die Änderungen gepflegt durch Change-Logs) → Change-Log erfordert die Index Erhöhung der Datensätze 
+•	2. Validierung der Datensätze durch den Versuch 
+•	3. Freigabe der Datensätze für die Produktion als XML-Datei (Wacker-Neuson) → sehen keine Änderungen Change-Log
+•	Excel-Datei ist nur für alle Datensätze aktuell vorhanden → Ohne Excel, wird auf der Basis der Hersteller XLM entwickelt und nach Fertigstellung findet erst die Umwandlung statt.</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="6 ist für sie nachvollziehbar, wer einen parametersatz wann und warum     geändert hat? 
+-	wäre das wichtig, für die entwicklung? gibt es eine klare aufteilung, wer für welche art an parametersätzen zuständig ist (z. b. konfigurationen, fahrantrieb, elektrische funktionen, usw.)? •	1. nein
+•	2. ja
+•	3. nein
+•	es gibt vereinzelt change-log einteilungen, oder innerhalb eines projektteams excel-dateien aber kein einheitliches system oder eine standardisierung •	zuständigkeit geregelt durch mündliche absprache → keine übersicht
+•	warum? → kein zusammenhang, außer auf anfrage
+•	wichtigkeit: wahrscheinlich schon → durch die änderungsmenge keine übersicht mehr •	ab serie ja → change-log werden hier gepflegt 
+•	vorentwicklung → keine große interesse 
+•	reicht aktuell aus •	relevanz eher weniger 
+•	nach jeder änderung → neue validierung → abschlussbericht (besprechung beinhaltet eine saubere übersicht über änderungen, wer was und warum? •	ja → da die änderung nur durch die e und e abteilung durchgeführt wird –y führen hierzu eine excel die alle change-logs auflistet → eigenständige pflege (manueller change-log)
+•	keine sicherstellung, da jeder die datensätze ändern könnte → warum und wer sieht man nicht. 
+•	aktuell: noch keine einheitliche vorgehensweise → anzahl der änderungen bestimmt die übersichtlichkeit des changs-logs =&gt; viele änderungen geringere übersicht. 
+•	zum serienstart → üblich das viel änderungen vorgenommen werden müssen">
+      <div class="question-head">
+        <div class="q-number">06</div>
+        <h3>Ist für Sie nachvollziehbar, wer einen Parametersatz wann und warum     geändert hat? 
+-	Wäre das wichtig, für die Entwicklung? Gibt es eine klare Aufteilung, wer für welche Art an Parametersätzen zuständig ist (z. B. Konfigurationen, Fahrantrieb, elektrische Funktionen, usw.)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	1. Nein
+•	2. Ja
+•	3. Nein
+•	Es gibt vereinzelt Change-Log Einteilungen, oder innerhalb eines Projektteams Excel-Dateien aber kein einheitliches System oder eine Standardisierung</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Zuständigkeit geregelt durch mündliche Absprache → keine Übersicht
+•	Warum? → Kein Zusammenhang, außer auf Anfrage
+•	Wichtigkeit: Wahrscheinlich schon → durch die Änderungsmenge keine Übersicht mehr</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Ab Serie ja → Change-Log werden hier gepflegt 
+•	Vorentwicklung → keine große Interesse 
+•	Reicht aktuell aus</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Relevanz eher weniger 
+•	Nach jeder Änderung → neue Validierung → Abschlussbericht (Besprechung beinhaltet eine saubere Übersicht über Änderungen, wer was und warum?</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Ja → da die Änderung nur durch die E und E Abteilung durchgeführt wird –Y führen hierzu eine Excel die alle Change-Logs auflistet → Eigenständige Pflege (manueller Change-Log)
+•	Keine Sicherstellung, da jeder die Datensätze ändern könnte → warum und wer sieht man nicht. 
+•	Aktuell: Noch keine einheitliche Vorgehensweise → Anzahl der Änderungen bestimmt die Übersichtlichkeit des Changs-Logs =&gt; viele Änderungen geringere Übersicht. 
+•	Zum Serienstart → üblich das viel Änderungen vorgenommen werden müssen</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="7 gibt es eine zentrale änderungshistorie / versionsverwaltung für parametersätze? •	nein 
+•	eigenständige excel-dateien → auch hier kein standard •	nein, jeder belegt sein eigener change-lock (e und e) •	zentral nein, maximal für serien → manuelle pflege •	nur über die confluence-seite → man sieht was aktuell freigegeben ist, zur serialnummer 
+•	sap → index der versionen wird hochgeschalten •	nein, gibt es so nicht → würde aber sinn machen 
+•	aktuell: änderungshistorie in der produktion → confluence-seite übersicht der änderungen und index-erhöhungen (zentrale änderungshistorie für alle serienmaschinen drauf sind)  
+•	confluence-seite hält fest: aktueller datensatz (datum der freigabe, ab wann der neue datensatz verwendet wird → produktionsseitig)">
+      <div class="question-head">
+        <div class="q-number">07</div>
+        <h3>Gibt es eine zentrale Änderungshistorie / Versionsverwaltung für Parametersätze?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Nein 
+•	Eigenständige Excel-Dateien → auch hier kein Standard</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Nein, jeder belegt sein eigener Change-Lock (E und E)</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Zentral nein, maximal für Serien → manuelle Pflege</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Nur über die Confluence-Seite → man sieht was aktuell freigegeben ist, zur Serialnummer 
+•	SAP → Index der Versionen wird hochgeschalten</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Nein, gibt es so nicht → würde aber Sinn machen 
+•	Aktuell: Änderungshistorie in der Produktion → Confluence-Seite Übersicht der Änderungen und Index-Erhöhungen (zentrale Änderungshistorie für alle Serienmaschinen drauf sind)  
+•	Confluence-Seite hält fest: aktueller Datensatz (Datum der Freigabe, ab wann der neue Datensatz verwendet wird → Produktionsseitig)</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="8 können parametersätze eindeutig einem softwarestand, einer fahrzeugvariante oder einer seriennummer zugeordnet werden? (bis zu softwareindex 8 kann der parametersatz 5 verwendet werden?) •	nein 
+•	diese umsetzung würde aber ein schnellere zuordnung als folge haben, was eine zeitersparnis bei der suche nach dem richtigen parametersatz bedeuten würde •	kann man nicht, nur wenn alles komplett sauber kommuniziert worden ist → kein überblick 
+•	stetige änderung → hoher händischer aufwand ,zu wenig kapazität •	stetige änderungen an den datensätzen verhindern das •	nein, durch die beschreibung der e und e- abteilung •	nein 
+•	excel: eigene übersicht → aktuelle version datensätze gilt für softwareversion xy 
+•	historie ist nur bis zu einem gewissen grad möglich → nur durch eigene pflege möglich → kein automatisierte übersicht nicht vorhanden">
+      <div class="question-head">
+        <div class="q-number">08</div>
+        <h3>Können Parametersätze eindeutig einem Softwarestand, einer Fahrzeugvariante oder einer Seriennummer zugeordnet werden? (Bis zu Softwareindex 8 kann der Parametersatz 5 verwendet werden?)</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Nein 
+•	Diese Umsetzung würde aber ein schnellere Zuordnung als Folge haben, was eine Zeitersparnis bei der Suche nach dem richtigen Parametersatz bedeuten würde</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Kann man nicht, nur wenn alles komplett sauber kommuniziert worden ist → kein Überblick 
+•	Stetige Änderung → hoher händischer Aufwand ,zu wenig Kapazität</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Stetige Änderungen an den Datensätzen verhindern das</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Nein, durch die Beschreibung der E und E- Abteilung</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Nein 
+•	Excel: Eigene Übersicht → aktuelle Version Datensätze gilt für Softwareversion xy 
+•	Historie ist nur bis zu einem gewissen Grad möglich → nur durch eigene Pflege möglich → kein Automatisierte Übersicht nicht vorhanden</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="9 gibt es eine sicherstellung das der richtige datensatz zum zeitpunkt x auf dem richtigen fahrzeug ist? •	nur durch eigenständiges wissen, und richtige einpflegung der mitarbeiter 
+•	einen end-check gibt es nicht → war mal angedacht aber zu hoher aufwand •	nein, es gibt keine endkontroller bezüglich softwarestand oder parameterdatensatzversion •	serie / 0-serie über kadias 
+•	excel-übersicht → eigenständig. •	durch die mitarbeiter → eigenständig •	aktuell wird das nur durch die mitarbeiter sichergestellt, dass die aktuellen parameterdatensätze auch wirklich alle parameter der aktuellen version beinhalten 
+•	e und e: gibt excel an die produktion weiter, diese beinhaltet anweisungen zu den parameterdatensätze welche zu welchem fahrzeug gehören 
+•	überprüfung kann durch die -e und e nicht stattfinden, keinen einfluss auf die aufgabe der produktion 
+•	bestandteil → produktionsprozess">
+      <div class="question-head">
+        <div class="q-number">09</div>
+        <h3>Gibt es eine Sicherstellung das der richtige Datensatz zum Zeitpunkt x auf dem richtigen Fahrzeug ist?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Nur durch eigenständiges Wissen, und richtige Einpflegung der Mitarbeiter 
+•	Einen End-Check gibt es nicht → war mal angedacht aber zu hoher Aufwand</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Nein, es gibt keine Endkontroller bezüglich Softwarestand oder Parameterdatensatzversion</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Serie / 0-Serie über Kadias 
+•	Excel-Übersicht → eigenständig.</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Durch die Mitarbeiter → Eigenständig</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Aktuell wird das nur durch die Mitarbeiter sichergestellt, dass die aktuellen Parameterdatensätze auch wirklich alle Parameter der aktuellen Version beinhalten 
+•	E und E: Gibt Excel an die Produktion weiter, diese beinhaltet Anweisungen zu den Parameterdatensätze welche zu welchem Fahrzeug gehören 
+•	Überprüfung kann durch die -E und E nicht stattfinden, keinen Einfluss auf die Aufgabe der Produktion 
+•	Bestandteil → Produktionsprozess</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="10 wo sehen sie aktuell einschränkungen bei der rückverfolgbarkeit (parameterseitig)? •	frage 5 – 8 •	parameterseitig → aktuell keine vorhanden •	gibt es keine → manuelle eintragung (funktioniert bei tele besser als bei radlader) •	schreibrechte aktuell nicht mehr für alle → trotzdem relativ viele z.b. alle aus der entwicklung 
+•	trotzdem noch eine hohe einschränkung •	es gibt kein richtiges versionsmanagement 
+•	teilweise → manueller change-log (bei schlechter pflege → geringe bis gar keine rückverfolgbarkeit) 
+•	sollte kein change-log vorhanden sein → keine rückverfolgbarkeit 
+•	=&gt; automatisierter änderungsprozess">
+      <div class="question-head">
+        <div class="q-number">10</div>
+        <h3>Wo sehen Sie aktuell Einschränkungen bei der Rückverfolgbarkeit (Parameterseitig)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Frage 5 – 8</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Parameterseitig → Aktuell keine vorhanden</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Gibt es keine → manuelle Eintragung (funktioniert bei Tele besser als bei Radlader)</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Schreibrechte aktuell nicht mehr für alle → trotzdem relativ viele z.B. alle aus der Entwicklung 
+•	Trotzdem noch eine hohe Einschränkung</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Es gibt kein richtiges Versionsmanagement 
+•	Teilweise → manueller Change-Log (bei schlechter Pflege → geringe bis gar keine Rückverfolgbarkeit) 
+•	Sollte kein Change-Log vorhanden sein → keine Rückverfolgbarkeit 
+•	=&gt; Automatisierter Änderungsprozess</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="11 sind zuständigkeiten für parametersätze eindeutig geregelt? •	unausgesprochen → keine eindeutige regelung 
+•	aktuell mündliche absprache •	nein
+•	es gibt projektbezogene verantwortliche, parameterhandling (erstellung, richtigkeit) für die parameterdatensätze gibt es nur durch absprachen eine regelung •	ja, projektspezifisch → jeder hat seinen aufgabenbereich •	absprache → teilen sich die aufgaben 
+•	keine übersicht, wer sich bei der e und e um was sich kümmert → wäre gut, da man so schnell an infos zum richtigen betreruer kommen würde •	ja, eigentlich e und e → inhalte der datensätze ist die aufgabe des versuchs 
+•	zuständigkeiten der einzelnen parameter → zuweisung durch excel (aber nicht 100 prozent)">
+      <div class="question-head">
+        <div class="q-number">11</div>
+        <h3>Sind Zuständigkeiten für Parametersätze eindeutig geregelt?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Unausgesprochen → keine eindeutige Regelung 
+•	Aktuell mündliche Absprache</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Nein
+•	Es gibt Projektbezogene Verantwortliche, Parameterhandling (Erstellung, Richtigkeit) für die Parameterdatensätze gibt es nur durch Absprachen eine Regelung</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Ja, Projektspezifisch → jeder hat seinen Aufgabenbereich</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Absprache → teilen sich die Aufgaben 
+•	Keine Übersicht, wer sich bei der E und E um was sich kümmert → Wäre gut, da man so schnell an Infos zum richtigen Betreruer kommen würde</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Ja, eigentlich E und E → Inhalte der Datensätze ist die Aufgabe des Versuchs 
+•	Zuständigkeiten der Einzelnen Parameter → Zuweisung durch Excel (aber nicht 100 Prozent)</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="12 gibt es klare berechtigungen (z. b. lesen, ändern, freigeben)? •	lesen → jeder 
+•	ändern → e und e 
+•	freigeben → validierung 
+•	keine klare berechtigung →  unausgesprochen •	eigentlich nein → datensatz 
+•	im projekt selber ja → interne regelung •	jeder darf alles •	auf der ordnerstruktur kann die av nur lesen, außerhalb der struktur kann man den verändern 
+•	freigabe in der produktion nur durch die av → ablage auf dem aqis-server •	ja, eigentlich e und e → inhalte der datensätze ist die aufgabe des versuchs 
+•	zuständigkeiten der einzelnen parameter → zuweisung durch excel (aber nicht 100 prozent)">
+      <div class="question-head">
+        <div class="q-number">12</div>
+        <h3>Gibt es klare Berechtigungen (z. B. lesen, ändern, freigeben)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Lesen → Jeder 
+•	Ändern → E und E 
+•	Freigeben → Validierung 
+•	Keine Klare Berechtigung →  unausgesprochen</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Eigentlich Nein → Datensatz 
+•	Im Projekt selber ja → interne Regelung</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Jeder darf alles</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Auf der Ordnerstruktur kann die AV nur lesen, außerhalb der Struktur kann man den verändern 
+•	Freigabe in der Produktion nur durch die AV → Ablage auf dem Aqis-Server</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Ja, eigentlich E und E → Inhalte der Datensätze ist die Aufgabe des Versuchs 
+•	Zuständigkeiten der Einzelnen Parameter → Zuweisung durch Excel (aber nicht 100 Prozent)</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="13 welche it-systeme oder tools nutzen sie im zusammenhang mit parametersätzen? •	testprogramme / herstellertools (bosch, danfoss)
+•	notepad ++ für vergleiche 
+•	kadias und excel •	wie sie auf die ecu kommen: kadias, flashtools
+•	öffnen und bearbeiten: python → umwandlung, notepad ++, editor, wordpad •	winmerge → vergleichen 
+•	notepad ++ → vergleichen 
+•	lieferanten service-tools / entwicklertools → änderungen, übersicht der veränderten parameter zum vorherigen parameterdatensatzstand 
+•	excel •	aqis → bereitstellung der parameterdatensätzen für die produktion 
+•	notepad plus plus •	excel
+•	notepad ++ → datensatzvergleiche
+•	hersteller / entwicklertools 
+•	sap → ablage der datensätze, software (händischer prozess)">
+      <div class="question-head">
+        <div class="q-number">13</div>
+        <h3>Welche IT-Systeme oder Tools nutzen Sie im Zusammenhang mit Parametersätzen?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Testprogramme / Herstellertools (Bosch, Danfoss)
+•	Notepad ++ für Vergleiche 
+•	Kadias und Excel</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Wie Sie auf die ECU kommen: Kadias, Flashtools
+•	Öffnen und Bearbeiten: Python → Umwandlung, Notepad ++, Editor, WordPad</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Winmerge → Vergleichen 
+•	Notepad ++ → Vergleichen 
+•	Lieferanten Service-Tools / Entwicklertools → Änderungen, Übersicht der veränderten Parameter zum vorherigen Parameterdatensatzstand 
+•	Excel</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Aqis → Bereitstellung der Parameterdatensätzen für die Produktion 
+•	Notepad plus plus</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Excel
+•	Notepad ++ → Datensatzvergleiche
+•	Hersteller / Entwicklertools 
+•	SAP → Ablage der Datensätze, Software (händischer Prozess)</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="14 ist eine verknüpfung zu systemen wie z. b. stücklisten, softwareständen oder fahrzeugdaten vorhanden (sap-system)? •	ein stück weit durch sap •	nicht für kadias → keine schnittstelle •	ja ab 0-serie –&gt; sap-nummer notwendig für entwicklung 
+•	wenig berührung •	keine verknüpfung zwischen aqis und sap 
+•	sap: ermöglicht manuelles nachschauen der mitarbeiter, welche parameterdatensätze wirklich freigegeben sind. •	nein → aktuell händischer prozess 
+•	wäre aber sehr wünschenswert für die zukunft → automatisierter prozess">
+      <div class="question-head">
+        <div class="q-number">14</div>
+        <h3>Ist eine Verknüpfung zu Systemen wie z. B. Stücklisten, Softwareständen oder Fahrzeugdaten vorhanden (SAP-System)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Ein Stück weit durch SAP</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Nicht für Kadias → keine Schnittstelle</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Ja ab 0-Serie –&gt; SAP-Nummer notwendig für Entwicklung 
+•	Wenig Berührung</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Keine Verknüpfung zwischen Aqis und SAP 
+•	SAP: Ermöglicht manuelles nachschauen der Mitarbeiter, welche Parameterdatensätze wirklich freigegeben sind.</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Nein → aktuell händischer Prozess 
+•	Wäre aber sehr wünschenswert für die Zukunft → automatisierter Prozess</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="15 müssen/können sie aktuell während der bearbeitungsphase den reifegrad (statusabfrage/reifegradüberwachung) eines parametersatzes erkennen? wie weit ist der parameterdatensatz schon bearbeitet (status)? •	nein gibt es nicht → stetige änderungen an den parametersätzen verhindern das •	nur durch nachfragen •	schwierig abschätzen zu können → weil man nicht weiß wann ein parameterdatensatz fertig 
+•	nein, würde keinen sinn machen,  weil ein zahnrad in das andere mit eingeht 
+•	reifegradüberwachung abschätzung nur an den jeweiligen funktionieren funktionen ! •	bekommen nur fertige → keine relevanz 
+•	stand für 0-serie und einen für serie, zwei unterschiedliche stände •	keine erkennung 
+•	ungewiss ob das für die zukunft notwendig ist → wünschenswert für führungskräfte eventuell">
+      <div class="question-head">
+        <div class="q-number">15</div>
+        <h3>Müssen/Können Sie aktuell während der Bearbeitungsphase den Reifegrad (Statusabfrage/Reifegradüberwachung) eines Parametersatzes erkennen? Wie weit ist der Parameterdatensatz schon bearbeitet (Status)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Nein gibt es nicht → stetige Änderungen an den Parametersätzen verhindern das</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Nur durch Nachfragen</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Schwierig abschätzen zu können → weil man nicht weiß wann ein Parameterdatensatz fertig 
+•	Nein, würde keinen Sinn machen,  weil ein Zahnrad in das andere mit eingeht 
+•	Reifegradüberwachung Abschätzung nur an den jeweiligen funktionieren Funktionen !</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Bekommen nur fertige → keine Relevanz 
+•	Stand für 0-Serie und einen für Serie, zwei unterschiedliche Stände</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Keine Erkennung 
+•	Ungewiss ob das für die Zukunft notwendig ist → Wünschenswert für Führungskräfte eventuell</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="16 wie bewerten sie den aktuellen umgang mit parametersätzen insgesamt? •	aufwendige teamarbeit → viele zahnräder (arbeiten) müssen abgestimmt sein, sodass ein fertiges ergebnis herauskommt •	miserabel
+•	unverschlüsselt, händisch ,keine absicherung 
+•	diagnose: vielfalt, sonderwünsche (z.b. parameteränderungen, die nur kadias (weil man sich datensätze sparen möchte) im nachgang über kadias geändert werden) •	relativ gut, durch direkte gespräche mit den beteiligten 
+•	setzt voraus das sehr gewissenhaft gearbeitet wird und lieber zwei bis dreimal drüber gucken, wie einmal zu wenig. •	in den letzten 1,5 jahren verbessert → noch lange nicht an einem sicheren stand → viel denk dran und eigenständigen wissen •	sehr individuell → konzerninterne unterscheidungen  / datensatz (fahrantrieb – arbeitshydraulik unterschiedlicher umgang)">
+      <div class="question-head">
+        <div class="q-number">16</div>
+        <h3>Wie bewerten Sie den aktuellen Umgang mit Parametersätzen insgesamt?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Aufwendige Teamarbeit → viele Zahnräder (Arbeiten) müssen abgestimmt sein, sodass ein fertiges Ergebnis herauskommt</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Miserabel
+•	Unverschlüsselt, händisch ,keine Absicherung 
+•	Diagnose: Vielfalt, Sonderwünsche (z.B. Parameteränderungen, die nur Kadias (weil man sich Datensätze sparen möchte) im Nachgang über Kadias geändert werden)</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Relativ gut, durch direkte Gespräche mit den beteiligten 
+•	Setzt voraus das sehr gewissenhaft gearbeitet wird und lieber zwei bis dreimal drüber gucken, wie einmal zu wenig.</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	In den letzten 1,5 Jahren verbessert → noch lange nicht an einem sicheren Stand → viel denk dran und eigenständigen Wissen</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Sehr individuell → Konzerninterne Unterscheidungen  / Datensatz (Fahrantrieb – Arbeitshydraulik unterschiedlicher Umgang)</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="17 welche aspekte funktionieren aus ihrer sicht gut? •	absprachen, kommunikation untereinander (projektteam) •	wenig, wenn dann nur durch absprache  
+•	absprache mit kollegen •	absprachen / abstimmungen •	kommunikation mit anderen fachbereichen → e und e 
+•	die form aktuell → funktioniert in dem gefüge gut (personalwechsel könnte das erschweren) 
+•	kein automatisierter ablauf 
+•	absprachen → wenn diese gut ablaufen, dann funktioniert auch das system gut •	excel mit mehreren datensätze gleichzeitig zu exportieren → um gesamtüberblick über alle datensätze zu erhalten =&gt; gute basis 
+•	wacker-neuson spezifische struktur → einheitlich 
+•	austausch mit der produktion → confluence-seite =&gt; guter überblick was ist aktuell">
+      <div class="question-head">
+        <div class="q-number">17</div>
+        <h3>Welche Aspekte funktionieren aus Ihrer Sicht gut?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Absprachen, Kommunikation untereinander (Projektteam)</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Wenig, wenn dann nur durch Absprache  
+•	Absprache mit Kollegen</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Absprachen / Abstimmungen</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Kommunikation mit anderen Fachbereichen → E und E 
+•	Die Form aktuell → funktioniert in dem Gefüge gut (Personalwechsel könnte das erschweren) 
+•	Kein automatisierter Ablauf 
+•	Absprachen → wenn diese gut ablaufen, dann funktioniert auch das System gut</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Excel mit mehreren Datensätze gleichzeitig zu exportieren → um Gesamtüberblick über alle Datensätze zu erhalten =&gt; gute Basis 
+•	Wacker-Neuson spezifische Struktur → einheitlich 
+•	Austausch mit der Produktion → Confluence-Seite =&gt; guter Überblick was ist aktuell</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="18 wo sehen sie die größten herausforderungen im heutigen parametermanagement? beziehungsweise wo sehen sie den größten bedarf, was sollte sich unbedingt ändern in bezug auf ein neues parametermanagement-system (wünsche)? •	nachvollziehbarkeit → traceability innerhalb eines tools 
+•	verwaltung → bis zur erstellung (vergleichen, testen) innerhalb eines tools 
+•	berechtigungsstufen (freigeben, lesen, ändern) 
+•	suche nach parametersettings die gleich heißen, sodass man die aus früheren projekten vergleichen und eventuell übernehmen kann → sehr gut: wenn das auch funktionieren würde wenn diese unterschiedlich heißen (sehr schwierig) •	extreme vielfalt 
+•	zu viele updates für serienmaschinen 
+•	zu viele sonderwünsche 
+•	zu viele experten 
+•	keine rückverfolgbarkeit gegenüber änderungen durch händler z.b., sodass man beweise hätte, dass der händler das doch geändert hat 
+•	alles vereinheitlichen, weniger updates  
+•	wenn ein datensatz 10 probleme hat , alle gemeinsam behebt und nicht 4 verschiedene updates bringt sondern eins, das alles beinhaltet. → weniger updates → grundsätzlicher umgang mit parametern. 
+•	für die diagnose: wäre es von vorteil, wenn das tool, in der lage wäre alle wichtigen dateien, die im zusammenhang mit dem datensatz stehen automatisiert vervollständigt werden. diagnosetool: •	händische übertragung 
+•	hoher aufwand einzelne parameter heraussuchen •	keine, geringe sicherheit 
+•	geringer automatismus → zu viele zahnräder die funktionieren müssen 
+•	viel manuelle arbeit 
+•	auswirkungen von cra noch ungewiss •	erstellung der parameterdatensätze (rückverfolgbarkeit, export) 
+•	änderungen einzelner werte innerhalb eines datensatzes
+•	keine automatisierte index-anpassung">
+      <div class="question-head">
+        <div class="q-number">18</div>
+        <h3>Wo sehen Sie die größten Herausforderungen im heutigen Parametermanagement? Beziehungsweise wo sehen sie den größten Bedarf, was sollte sich unbedingt ändern in Bezug auf ein neues Parametermanagement-System (Wünsche)?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Nachvollziehbarkeit → Traceability innerhalb eines Tools 
+•	Verwaltung → bis zur Erstellung (Vergleichen, Testen) innerhalb eines Tools 
+•	Berechtigungsstufen (Freigeben, Lesen, Ändern) 
+•	Suche nach Parametersettings die gleich heißen, sodass man die aus früheren Projekten vergleichen und eventuell übernehmen kann → sehr gut: Wenn das auch funktionieren würde wenn diese unterschiedlich heißen (sehr schwierig)</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Extreme Vielfalt 
+•	Zu viele Updates für Serienmaschinen 
+•	Zu viele Sonderwünsche 
+•	Zu viele Experten 
+•	Keine Rückverfolgbarkeit gegenüber Änderungen durch Händler z.B., sodass man Beweise hätte, dass der Händler das doch geändert hat 
+•	Alles vereinheitlichen, weniger Updates  
+•	Wenn ein Datensatz 10 Probleme hat , alle gemeinsam behebt und nicht 4 verschiedene Updates bringt sondern eins, das alles beinhaltet. → weniger Updates → grundsätzlicher Umgang mit Parametern. 
+•	Für die Diagnose: Wäre es von Vorteil, wenn das Tool, in der Lage wäre alle wichtigen Dateien, die im Zusammenhang mit dem Datensatz stehen automatisiert vervollständigt werden. Diagnosetool:</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Händische Übertragung 
+•	Hoher Aufwand einzelne Parameter heraussuchen</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Keine, geringe Sicherheit 
+•	Geringer Automatismus → zu viele Zahnräder die funktionieren müssen 
+•	Viel manuelle Arbeit 
+•	Auswirkungen von CRA noch ungewiss</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Erstellung der Parameterdatensätze (Rückverfolgbarkeit, Export) 
+•	Änderungen einzelner Werte innerhalb eines Datensatzes
+•	Keine automatisierte Index-Anpassung</div>
+        </article>
+        
+      </div>
+    </section>
+    
+
+    <section class="question-block" data-question="19 wie würde sie ein tool in bezug auf das parameterhandling erleichtern oder unterstützen? •	tool/übersicht um die änderungen besser nachvollziehen zu können 
+•	bessere zuordnung welcher parameterstand passt zu welchem softwarestand 
+•	übersichtliches festhalten der verantwortlichen welche für einzelne parameter zuständig sind. •	tool:  - automatisiere erstellung der anwendungsspezifischen pattern-files: 
+- z.b. controller wird getauscht → kompletter datensatz aufspielen
+- softwaretausch → einzelne parameter ändern sich zum vorherigen datensatz und andere bleiben vorhanden und sollen automatisiert in den anwendungsspezifischen file eingebaut werden. •	einzelne datensätze auf plausibilität zu überprüfen 
+•	visuelle darstellung von parameterkennlinien innerhalb des programms → funktioniert aktuell nur händisch in excel 
+•	änderungen des hauptdatensatzes in unterdatensätze z.b. fahrantrieb → 20, 30 und 40 km/h
+•	werkzeug zur pflege / bearbeitung von datensätzen 
+•	generierung xml-bosch in wacker-neuson parameterdatensatz und wieder zurück •	neuprojekte → abnahme der manuellen tätigkeiten 
+•	zusammenhang zwischen dem tool und stückliste, sap-systemen → das man dadurch eben beziehungswissen, merkmalstrukturen in das tool aus den stücklisten übertragen könnte, ohne manuelle arbeit. •	übersichtliches tool → automatische index / versionserhöhung 
+•	eigenkontrolle durch ein tool → change-log  =&gt; übersicht 
+•	tool sicherstellung: automatisiertes exportieren in die wacker neuson struktur → fehler vermeiden 
+•	automatische versionserhöhung bei änderungen 
+•	frage: könnte ein tool maschinenspezifische automatisiert auf der basis des hauptdatensatzes spezifisch anpassen 
+•	ein verwaltungstool für alle parameterdatensätze (bosch, hydac) 
+•	eine datenbank für alle fahrzeuge: definieren wer schreib-, lese-, änderungsrechte umsetzen würde 
+•	kombination: softwaretool das auf eine datenbank (parameterdatensätze aller fahrzeuge) zugreift">
+      <div class="question-head">
+        <div class="q-number">19</div>
+        <h3>Wie würde Sie ein Tool in Bezug auf das Parameterhandling erleichtern oder unterstützen?</h3>
+      </div>
+      <div class="answers-grid">
+        
+        <article class="answer-card" data-person="marcus aufleiter / lucas schnetz /rafael schreiber">
+          <h4>Marcus Aufleiter / Lucas Schnetz /Rafael Schreiber</h4>
+          <div class="answer-text">•	Tool/Übersicht um die Änderungen besser nachvollziehen zu können 
+•	Bessere Zuordnung welcher Parameterstand passt zu welchem Softwarestand 
+•	Übersichtliches festhalten der Verantwortlichen welche für einzelne Parameter zuständig sind.</div>
+        </article>
+        
+        <article class="answer-card" data-person="maik lohrey / aleixei buth">
+          <h4>Maik Lohrey / Aleixei Buth</h4>
+          <div class="answer-text">•	Tool:  - Automatisiere Erstellung der Anwendungsspezifischen Pattern-Files: 
+- z.B. Controller wird getauscht → Kompletter Datensatz aufspielen
+- Softwaretausch → Einzelne Parameter ändern sich zum vorherigen Datensatz und andere bleiben vorhanden und sollen automatisiert in den Anwendungsspezifischen File eingebaut werden.</div>
+        </article>
+        
+        <article class="answer-card" data-person="hubert dabbelt / matthias löffler">
+          <h4>Hubert Dabbelt / Matthias Löffler</h4>
+          <div class="answer-text">•	Einzelne Datensätze auf Plausibilität zu überprüfen 
+•	Visuelle Darstellung von Parameterkennlinien innerhalb des Programms → funktioniert aktuell nur händisch in Excel 
+•	Änderungen des Hauptdatensatzes in Unterdatensätze z.B. Fahrantrieb → 20, 30 und 40 km/h
+•	Werkzeug zur Pflege / Bearbeitung von Datensätzen 
+•	Generierung XML-Bosch in Wacker-Neuson Parameterdatensatz und wieder zurück</div>
+        </article>
+        
+        <article class="answer-card" data-person="yannik stephan / jürgen auer">
+          <h4>Yannik Stephan / Jürgen Auer</h4>
+          <div class="answer-text">•	Neuprojekte → Abnahme der manuellen Tätigkeiten 
+•	Zusammenhang zwischen dem Tool und Stückliste, SAP-Systemen → das man dadurch eben Beziehungswissen, Merkmalstrukturen in das Tool aus den Stücklisten übertragen könnte, ohne manuelle Arbeit.</div>
+        </article>
+        
+        <article class="answer-card" data-person="daniel wörner / daniel sessler">
+          <h4>Daniel Wörner / Daniel Sessler</h4>
+          <div class="answer-text">•	Übersichtliches Tool → automatische Index / Versionserhöhung 
+•	Eigenkontrolle durch ein Tool → Change-Log  =&gt; Übersicht 
+•	Tool Sicherstellung: Automatisiertes Exportieren in die Wacker Neuson Struktur → Fehler vermeiden 
+•	Automatische Versionserhöhung bei Änderungen 
+•	Frage: Könnte ein Tool Maschinenspezifische automatisiert auf der Basis des Hauptdatensatzes spezifisch anpassen 
+•	Ein Verwaltungstool für alle Parameterdatensätze (Bosch, Hydac) 
+•	Eine Datenbank für alle Fahrzeuge: Definieren wer Schreib-, Lese-, Änderungsrechte umsetzen würde 
+•	Kombination: Softwaretool das auf eine Datenbank (Parameterdatensätze aller Fahrzeuge) zugreift</div>
+        </article>
+        
+      </div>
+    </section>
+    
+  </div>
+
+  <div class="footer">
+    Quelle: Auswertung_Mitarbeiter_Befragung(2).xlsx · generiert aus der hochgeladenen Excel-Datei. Antworten werden mit originalen Zeilenumbrüchen und vollständigem Zellinhalt dargestellt.
+  </div>
+</div>
+
+<script>
+const search = document.getElementById('search');
+const blocks = [...document.querySelectorAll('.question-block')];
+search.addEventListener('input', () => {
+  const q = search.value.toLowerCase().trim();
+  blocks.forEach(block => {
+    block.classList.toggle('hidden', q && !block.dataset.question.includes(q));
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bachelor Experience | David Ammann</title>
+    <link rel="stylesheet" href="css/vendor/fontawesome.min.css" />
+    <link rel="stylesheet" href="css/style.css?v=sharepoint-final-01" />
+    <link rel="stylesheet" href="css/animations.css?v=entscheidung-details-01" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="#hero" class="brand"><img src="assets/logos/kramer-logo.svg?v=kramer-logo-03" alt="Kramer" /></a>
+      <span class="top-meta">Bachelorarbeit</span>
+      <button id="menuToggle" class="menu-btn" aria-label="Navigation öffnen"><i class="fa-solid fa-bars"></i></button>
+    </header>
+
+    <nav id="sectionDots" class="section-dots" aria-label="Scrollfortschritt"></nav>
+
+    <aside id="quickMenu" class="quick-menu" aria-label="Schnellnavigation">
+      <img src="assets/logos/dhbw-logo.svg" alt="DHBW Ravensburg" />
+      <a href="#hero">Intro</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#situation">Ausgangssituation</a>
+      <a href="#method">Methodik</a>
+      <a href="#process">Anwendung</a>
+      <a href="#converter">Parameter Converter</a>
+      <a href="#vcdm">vCDM</a>
+      <a href="#sharepoint">SharePoint</a>
+    </aside>
+
+    <main>
+      <section id="hero" class="screen hero-screen" data-focus="loader">
+        <div class="hero-content reveal">
+          <h1>
+            <span>Entwicklung einer</span>
+            <span>Entscheidungsgrundlage</span>
+            <span>zur Auswahl eines</span>
+            <mark>Parametermanagement-Tools</mark>
+          </h1>
+          <ul class="hero-facts">
+            <li><i class="fa-solid fa-user"></i> David Ammann</li>
+            <li><i class="fa-solid fa-building-columns"></i> DHBW Ravensburg</li>
+            <li><i class="fa-solid fa-industry"></i> Kramer-Werke GmbH</li>
+          </ul>
+          <a class="cta" href="#roadmap">Präsentation starten <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <div class="scroll-hint"><i class="fa-solid fa-computer-mouse"></i><span>Scrollen, um zu beginnen</span></div>
+      </section>
+
+      <section id="roadmap" class="screen roadmap-screen roadmap-scene" data-focus="road">
+        <div class="screen-title reveal">
+          <h2>Roadmap</h2>
+          <p>Vier Hauptstationen auf dem Weg zur optimalen Lösung.</p>
+        </div>
+        <div id="roadmapPoints" class="roadmap-points reveal"></div>
+        <div id="roadmapLoader" class="roadmap-loader" aria-hidden="true"><i class="fa-solid fa-truck-front"></i></div>
+        <button id="roadmapNext" class="roadmap-next reveal" type="button">Weiter <i class="fa-solid fa-arrow-right"></i></button>
+      </section>
+
+      <section id="situation" class="screen situation-screen" data-focus="loader">
+        <div class="sit2-content reveal">
+          <div class="sit2-top">
+            <div class="sit2-title-row">
+              <span class="sit2-num">01</span>
+              <h2 class="sit2-heading">AUSGANGSSITUATION</h2>
+            </div>
+            <div class="sit2-rule"></div>
+            <p class="sit2-lead">Warum ein neues<br>Parametermanagement<br>notwendig ist.</p>
+          </div>
+          <div class="sit2-bottom">
+            <div class="sit2-panels">
+              <div class="sit2-panel sit2-panel-l">
+                <div class="sit2-panel-title">
+                  <span>DER AUSGANGSPUNKT</span>
+                  <small>IST NICHT NUR EIN FEHLENDES TOOL</small>
+                </div>
+                <div class="sit2-grid">
+                  <div class="sit2-item"><i class="fa-solid fa-folder-tree"></i><div><strong>DEZENTRALE ABLAGEN</strong><p>Parameter liegen in verschiedenen Quellen.</p></div></div>
+                  <div class="sit2-item"><i class="fa-solid fa-code"></i><div><strong>HEX / A2L / CDFX</strong><p>Unterschiedliche Formate ohne einheitliches System.</p></div></div>
+                  <div class="sit2-item"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>MEDIENBRÜCHE</strong><p>Manuelle Übertragungen sind fehleranfällig.</p></div></div>
+                  <div class="sit2-item"><i class="fa-solid fa-clock-rotate-left"></i><div><strong>HISTORIE UNKLAR</strong><p>Änderungen sind schwer nachvollziehbar.</p></div></div>
+                  <div class="sit2-item"><i class="fa-solid fa-user-shield"></i><div><strong>FREIGABEN VERTEILT</strong><p>Keine zentrale Kontrolle über Versionen.</p></div></div>
+                  <div class="sit2-item"><i class="fa-solid fa-bullseye"></i><div><strong>ZIEL</strong><p>Eine strukturierte Entscheidung für die richtige Lösung.</p></div></div>
+                </div>
+              </div>
+              <div class="sit2-panel sit2-panel-r">
+                <div class="sit2-panel-title">
+                  <span>HERAUSFORDERUNGEN IM ÜBERBLICK</span>
+                </div>
+                <div class="sit2-stats">
+                  <div class="sit2-stat"><i class="fa-solid fa-triangle-exclamation"></i><em>5+</em><strong>SYSTEME &amp; QUELLEN</strong><p>Aktuell im Einsatz</p></div>
+                  <div class="sit2-stat"><i class="fa-solid fa-file-lines"></i><em>1000+</em><strong>PARAMETER</strong><p>In verschiedenen Formaten</p></div>
+                  <div class="sit2-stat"><i class="fa-solid fa-clock"></i><strong>HOHER AUFWAND</strong><p>Für Suche, Abgleich und Übertragung</p></div>
+                  <div class="sit2-stat"><i class="fa-solid fa-bullseye"></i><strong>EINE ENTSCHEIDUNG</strong><p>Für ein zukunftssicheres Parametermanagement</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="method" class="screen method-screen" data-focus="site">
+        <div id="methodOverview" class="method-subslide method-overview is-active">
+          <div class="method-title reveal">
+            <div class="method-title-row">
+              <span class="method-title-num">02</span>
+              <h2 class="method-title-text">METHODIK</h2>
+            </div>
+            <div class="method-title-rule"></div>
+            <p class="method-title-sub">VORGEHEN ZUR TOOLAUSWAHL</p>
+          </div>
+          <div class="method-process reveal">
+            <div class="method-line"></div>
+            <div id="methodCraneMarker" class="method-crane-marker"><i class="fa-solid fa-anchor"></i></div>
+            <div id="methodStations" class="method-stations" aria-label="Methodik-Stationen"></div>
+          </div>
+          <button id="methodOverviewNext" class="method-overview-next reveal" type="button">Weiter <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <!-- ═══ Analyse Folie 1: Ziel & Vorgehen ═══ -->
+        <div id="methodAnalyseSlide1" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.1</span>
+                <h2 class="analyse-heading">ANALYSE</h2>
+                <p class="analyse-subtitle">Ist-Zustand verstehen</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Ziel der Analysephase ist es, den aktuellen Umgang mit Parameterdaten zu verstehen und Schwachstellen im bestehenden Prozess sichtbar zu machen.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Prozessaufnahme</li>
+                <li><i class="fa-solid fa-circle-check"></i> Daten- und Systemlandschaft analysieren</li>
+                <li><i class="fa-solid fa-circle-check"></i> Experteninterviews durchführen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Schwachstellen identifizieren</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodOverview(false)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head">ZIEL &amp; VORGEHEN</h3>
+              <div class="analyse-flow-row">
+                <div class="analyse-flow-step">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <strong>DOKUMENTENANALYSE</strong>
+                  <p>Bestehende Dokumente, Prozesse und Datenstrukturen aufgenommen.</p>
+                </div>
+                <i class="fa-solid fa-arrow-right analyse-flow-arrow"></i>
+                <div class="analyse-flow-step">
+                  <i class="fa-solid fa-people-group"></i>
+                  <strong>EXPERTENINTERVIEWS</strong>
+                  <p>Probleme und Erfahrungen aus den Fachbereichen direkt erhoben.</p>
+                  <a class="analyse-detail-link" href="mitarbeiter_befragung_vollstaendige_antworten.html" target="_blank" rel="noopener">
+                    Details anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-arrow-right analyse-flow-arrow"></i>
+                <div class="analyse-flow-step">
+                  <i class="fa-solid fa-diagram-project"></i>
+                  <strong>TRIANGULATION</strong>
+                  <p>Erkenntnisse aus beiden Quellen abgeglichen und verdichtet.</p>
+                </div>
+              </div>
+              <div class="analyse-result-box">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                  <strong>SCHWACHSTELLEN IDENTIFIZIEREN</strong>
+                  <p>Zentrale Problemfelder im aktuellen Prozess erkannt.</p>
+                </div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.showMethodSubSlide('methodAnalyseSlide2')">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Analyse Folie 2: Ergebnis ═══ -->
+        <div id="methodAnalyseSlide2" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.1</span>
+                <h2 class="analyse-heading">ANALYSE</h2>
+                <p class="analyse-subtitle">Ergebnis der Analyse</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Die Analyse liefert ein ganzheitliches Bild des Ist-Zustands und zeigt die zentralen Schwachstellen im aktuellen Umgang mit Parameterdaten auf.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Ist-Prozess vollständig dokumentiert</li>
+                <li><i class="fa-solid fa-circle-check"></i> Schwachstellen klar identifiziert</li>
+                <li><i class="fa-solid fa-circle-check"></i> Medienbrüche und Risiken erkannt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Anforderungen für neue Lösung vorbereitet</li>
+                <li><i class="fa-solid fa-circle-check"></i> Grundlage für Anforderungskatalog geschaffen</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodSubSlide('methodAnalyseSlide1')"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head">ERGEBNIS DER ANALYSE</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-file-lines"></i>
+                  <strong>IST-PROZESS DOKUMENTIERT</strong>
+                  <p>Abläufe, Tools und Schnittstellen vollständig aufgenommen.</p>
+                  <a class="analyse-detail-link" href="sekundaer_primaerforschung.html" target="_blank" rel="noopener">
+                    Details anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-triangle-exclamation"></i><strong>SCHWACHSTELLEN ERKANNT</strong><p>Manuelle Ablagen und Medienbrüche identifiziert.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-database"></i><strong>MEDIENBRÜCHE IDENTIFIZIERT</strong><p>Daten in mehreren Systemen und Formaten verteilt.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-list-check"></i><strong>ANFORDERUNGEN ABGELEITET</strong><p>Anforderungen systematisch aus den Schwachstellen abgeleitet.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-crosshairs"></i><strong>GRUNDLAGE GESCHAFFEN</strong><p>Basis für den Anforderungskatalog gelegt.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.completeMethodStep()">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Anforderungen Folie 1: Ziel & Vorgehen ═══ -->
+        <div id="methodAnforderungenSlide1" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.2</span>
+                <h2 class="analyse-heading">ANFORDERUNGEN</h2>
+                <p class="analyse-subtitle">Anforderungen ableiten</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Auf Basis der Analyseergebnisse werden Anforderungen systematisch abgeleitet, strukturiert und in einem Katalog dokumentiert.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Analyseergebnisse auswerten</li>
+                <li><i class="fa-solid fa-circle-check"></i> Anforderungen ableiten und formulieren</li>
+                <li><i class="fa-solid fa-circle-check"></i> Kriterien nach MuSCoW priorisieren</li>
+                <li><i class="fa-solid fa-circle-check"></i> Anforderungskatalog aufbauen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Grundlage für Marktanalyse schaffen</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodOverview(false)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ZIEL &amp; VORGEHEN</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card"><i class="fa-solid fa-magnifying-glass"></i><strong>ANALYSE AUSWERTEN</strong><p>Ergebnisse aus Analyse und Interviews als Grundlage nutzen.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-clipboard-list"></i><strong>ANFORDERUNGEN ABLEITEN</strong><p>Fachliche, technische und organisatorische Anforderungen formulieren.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-sliders"></i><strong>PRIORISIEREN</strong><p>Muss-, Soll- und Kann-Kriterien festlegen und priorisieren.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-book-open"></i>
+                  <strong>KATALOG AUFBAUEN</strong>
+                  <p>Anforderungen strukturiert dokumentieren und kategorisieren.</p>
+                  <a class="analyse-detail-link" href="anforderungskatalog_aus_excel.html" target="_blank" rel="noopener">
+                    Details anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-bullseye"></i><strong>BEWERTUNG VORBEREITEN</strong><p>Kriterien für die Toolbewertung und Nutzwertanalyse vorbereiten.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span class="active"></span><span></span><span></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.showMethodSubSlide('methodAnforderungenSlide2')">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Anforderungen Folie 2: Ergebnis ═══ -->
+        <div id="methodAnforderungenSlide2" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.2</span>
+                <h2 class="analyse-heading">ANFORDERUNGEN</h2>
+                <p class="analyse-subtitle">Ergebnis der Anforderungsphase</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Die Anforderungsphase liefert einen vollständigen, priorisierten Katalog als Grundlage für den Toolvergleich.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Funktionale Anforderungen definiert</li>
+                <li><i class="fa-solid fa-circle-check"></i> Technische Anforderungen festgelegt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Organisatorische Anforderungen erfasst</li>
+                <li><i class="fa-solid fa-circle-check"></i> Kriterien priorisiert und eingeteilt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Anforderungskatalog erstellt</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodSubSlide('methodAnforderungenSlide1')"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ERGEBNIS DER ANFORDERUNGSPHASE</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card"><i class="fa-solid fa-clipboard-check"></i><strong>FUNKTIONALE ANFORDERUNGEN</strong><p>Anforderungen an Versionierung, Vergleich, Import/Export und Suche definiert.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-gear"></i><strong>TECHNISCHE ANFORDERUNGEN</strong><p>Datenformate, Integration, Performance und Skalierbarkeit festgelegt.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-people-group"></i><strong>ORGANISATORISCHE ANFORDERUNGEN</strong><p>Benutzerfreundlichkeit, Schulung und Lizenzmodell erfasst.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-list-check"></i><strong>KRITERIEN PRIORISIERT</strong><p>Alle Anforderungen in Muss-, Soll- und Kann-Kriterien eingeteilt.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-crosshairs"></i><strong>BEWERTUNGSGRUNDLAGE GESCHAFFEN</strong><p>Strukturierter Katalog als Basis für Toolvergleich und Nutzwertanalyse.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span class="active"></span><span></span><span></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.completeMethodStep()">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Marktanalyse Folie 1: Ziel & Vorgehen ═══ -->
+        <div id="methodMarktSlide1" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.3</span>
+                <h2 class="analyse-heading">MARKTANALYSE</h2>
+                <p class="analyse-subtitle">Tools identifizieren</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Auf Basis des Anforderungskatalogs werden relevante Tools am Markt systematisch recherchiert, verglichen und für die Bewertung vorbereitet.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Relevante Tools am Markt recherchieren</li>
+                <li><i class="fa-solid fa-circle-check"></i> Informationen und Details sammeln</li>
+                <li><i class="fa-solid fa-circle-check"></i> Bewertungskriterien definieren</li>
+                <li><i class="fa-solid fa-circle-check"></i> Tools systematisch bewerten</li>
+                <li><i class="fa-solid fa-circle-check"></i> Shortlist für Nutzwertanalyse erstellen</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodOverview(false)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ZIEL &amp; VORGEHEN</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card"><i class="fa-solid fa-magnifying-glass"></i><strong>MARKT RECHERCHIEREN</strong><p>Relevante Tools und Lösungen identifizieren und vorauswählen.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-clipboard-list"></i><strong>INFORMATIONEN SAMMELN</strong><p>Funktionen, Stärken, Schwächen und technische Details erheben.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-sliders"></i><strong>KRITERIEN DEFINIEREN</strong><p>Bewertungskriterien auf Basis der Anforderungen gewichten.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-scale-balanced"></i><strong>TOOLS BEWERTEN</strong><p>Tools systematisch bewerten und miteinander vergleichen.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-chart-bar"></i><strong>ERGEBNISSE AUFBEREITEN</strong><p>Grundlage für die Nutzwertanalyse bereitstellen.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span></span><span class="active"></span><span></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.showMethodSubSlide('methodMarktSlide2')">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Marktanalyse Folie 2: Ergebnis Showcase ═══ -->
+        <div id="methodMarktSlide2" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.3</span>
+                <h2 class="analyse-heading">MARKTANALYSE</h2>
+                <p class="analyse-subtitle">Ergebnis der Marktanalyse</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Nach systematischer Marktrecherche wurden 7 relevante Tools identifiziert und für die Nutzwertanalyse vorbereitet.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Vector vCDM</li>
+                <li><i class="fa-solid fa-circle-check"></i> CONTACT CIM Database</li>
+                <li><i class="fa-solid fa-circle-check"></i> dSPACE SYNECT</li>
+                <li><i class="fa-solid fa-circle-check"></i> AVL CRETA</li>
+                <li><i class="fa-solid fa-circle-check"></i> Mendix Low Code</li>
+                <li><i class="fa-solid fa-circle-check"></i> ETAS INCA eCDM</li>
+                <li><i class="fa-solid fa-circle-check"></i> Eigenentwicklung</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodSubSlide('methodMarktSlide1')"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ERGEBNIS DER MARKT- &amp; TOOLANALYSE</h3>
+              <div class="markt-showcase-row markt-showcase-row--seven">
+                <div class="markt-showcase-item is-featured">
+                  <div class="markt-showcase-top"><strong>Vector vCDM</strong><span>Vector Informatik</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-database markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-yellow"></div>
+                </div>
+                <div class="markt-showcase-item">
+                  <div class="markt-showcase-top"><strong>CIM Database</strong><span>CONTACT Software</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-network-wired markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-teal"></div>
+                </div>
+                <div class="markt-showcase-item">
+                  <div class="markt-showcase-top"><strong>dSPACE SYNECT</strong><span>dSPACE</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-microchip markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-neutral"></div>
+                </div>
+                <div class="markt-showcase-item">
+                  <div class="markt-showcase-top"><strong>AVL CRETA</strong><span>AVL</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-gauge markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-neutral"></div>
+                </div>
+                <div class="markt-showcase-item">
+                  <div class="markt-showcase-top"><strong>Mendix Low Code</strong><span>Mendix</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-cube markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-neutral"></div>
+                </div>
+                <div class="markt-showcase-item">
+                  <div class="markt-showcase-top"><strong>ETAS INCA eCDM</strong><span>ETAS</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-gear markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-white"></div>
+                </div>
+                <div class="markt-showcase-item">
+                  <div class="markt-showcase-top"><strong>Eigenentwicklung</strong><span>Kramer intern</span></div>
+                  <div class="markt-logo-box"><i class="fa-solid fa-code markt-tool-icon"></i></div>
+                  <div class="markt-showcase-glow markt-glow-neutral"></div>
+                </div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span></span><span class="active"></span><span></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.completeMethodStep()">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Nutzwertanalyse Folie 1: Ziel & Vorgehen ═══ -->
+        <div id="methodNutzwertSlide1" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.4</span>
+                <h2 class="analyse-heading">NUTZWERT&shy;ANALYSE</h2>
+                <p class="analyse-subtitle">Alternativen bewerten</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Die verbleibenden Tools aus der Shortlist werden anhand gewichteter Kriterien systematisch bewertet und miteinander verglichen.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Bewertungskriterien definieren</li>
+                <li><i class="fa-solid fa-circle-check"></i> Gewichtung der Anforderungen festlegen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Shortlist-Tools einzeln bewerten</li>
+                <li><i class="fa-solid fa-circle-check"></i> Gesamtnutzwerte berechnen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Ranking erstellen und vergleichen</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodOverview(false)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ZIEL &amp; VORGEHEN</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card"><i class="fa-solid fa-list-check"></i><strong>KRITERIEN DEFINIEREN</strong><p>Bewertungskriterien aus dem Anforderungskatalog ableiten.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-sliders"></i><strong>GEWICHTUNG FESTLEGEN</strong><p>Kriterien nach Relevanz gewichten und priorisieren.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-scale-balanced"></i><strong>TOOLS BEWERTEN</strong><p>Jeden Shortlist-Kandidaten anhand der Kriterien bewerten.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-calculator"></i><strong>NUTZWERT BERECHNEN</strong><p>Gewichtete Punkte addieren und Gesamtnutzwert ermitteln.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-chart-bar"></i><strong>RANKING ERSTELLEN</strong><p>Tools vergleichen und Entscheidungsgrundlage bereitstellen.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span></span><span></span><span class="active"></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.showMethodSubSlide('methodNutzwertSlide2')">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Nutzwertanalyse Folie 2: Ergebnis ═══ -->
+        <div id="methodNutzwertSlide2" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.4</span>
+                <h2 class="analyse-heading">NUTZWERT&shy;ANALYSE</h2>
+                <p class="analyse-subtitle">Ergebnis der Bewertungsphase</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Die Nutzwertanalyse liefert ein transparentes, nachvollziehbares Ranking als Basis für die finale Toolentscheidung.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Eigenentwicklung: 81,00 Punkte</li>
+                <li><i class="fa-solid fa-circle-check"></i> CIM Database: 79,77 Punkte</li>
+                <li><i class="fa-solid fa-circle-check"></i> Vector vCDM: 74,54 Punkte</li>
+                <li><i class="fa-solid fa-circle-check"></i> ETAS INCA eCDM: 52,62 Punkte</li>
+                <li><i class="fa-solid fa-circle-check"></i> Empfehlung: Vector vCDM</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodSubSlide('methodNutzwertSlide1')"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ERGEBNIS DER NUTZWERTANALYSE</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-table-cells"></i>
+                  <strong>GEWICHTUNGS&shy;MATRIX ERSTELLT</strong>
+                  <p>Alle Kriterien systematisch gewichtet und dokumentiert.</p>
+                  <a class="analyse-detail-link" href="bewertungsmatrix_aus_excel.html" target="_blank" rel="noopener">
+                    Details anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-star-half-stroke"></i><strong>4 TOOLS BEWERTET</strong><p>Eigenentwicklung, CIM, vCDM und eCDM im direkten Vergleich.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-trophy"></i>
+                  <strong>RANKING ERMITTELT</strong>
+                  <p>Eigenentwicklung führt rechnerisch – aber mit hohem Risiko.</p>
+                  <a class="analyse-detail-link" href="nutzwertanalyse_balkendiagramm.html" target="_blank" rel="noopener">
+                    Details anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-triangle-exclamation"></i><strong>RISIKO BERÜCKSICHTIGT</strong><p>Betriebsaufwand und Wartungsrisiko der Eigenentwicklung bewertet.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-bullseye"></i><strong>ENTSCHEIDUNGS&shy;GRUNDLAGE</strong><p>Strukturiertes Ranking als Basis für die finale Toolauswahl.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span></span><span></span><span class="active"></span><span></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.completeMethodStep()">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Entscheidung Folie 1: Ziel & Vorgehen ═══ -->
+        <div id="methodEntscheidungSlide1" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.5</span>
+                <h2 class="analyse-heading">ENTSCHEIDUNG</h2>
+                <p class="analyse-subtitle">Empfehlung ableiten</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Auf Basis der Nutzwertanalyse und einer praktischen Evaluation wird eine begründete Toolempfehlung ausgesprochen und dokumentiert.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Top-Tools aus Ranking vergleichen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Herstellerpräsentationen einholen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Praktische Evaluation durchführen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Finale Entscheidung treffen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Empfehlung dokumentieren</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodOverview(false)"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ZIEL &amp; VORGEHEN</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card"><i class="fa-solid fa-chart-bar"></i><strong>RANKING VERGLEICHEN</strong><p>Die bestbewerteten Tools aus der NWA gegenüberstellen.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-handshake"></i><strong>HERSTELLER BEFRAGEN</strong><p>Präsentationen und Demos bei Herstellern einholen.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-flask"></i><strong>TOOLS EVALUIEREN</strong><p>Praktische Tests und Pilotbetrieb zur Absicherung der Wahl.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-circle-check"></i><strong>ENTSCHEIDUNG TREFFEN</strong><p>Tool auf Basis aller Erkenntnisse final auswählen.</p></div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-file-lines"></i><strong>EMPFEHLUNG DOKUMENTIEREN</strong><p>Entscheidung begründen und für Stakeholder aufbereiten.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span></span><span></span><span></span><span class="active"></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.showMethodSubSlide('methodEntscheidungSlide2')">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Entscheidung Folie 2: Ergebnis ═══ -->
+        <div id="methodEntscheidungSlide2" class="method-subslide analyse-slide">
+          <div class="analyse-breadcrumb"><span>02</span><strong>METHODIK</strong><small>Vorgehen zur Toolauswahl</small></div>
+          <div class="analyse-inner">
+            <div class="analyse-left">
+              <div class="analyse-header">
+                <span class="analyse-num">02.5</span>
+                <h2 class="analyse-heading">ENTSCHEIDUNG</h2>
+                <p class="analyse-subtitle">Ergebnis der Auswahlentscheidung</p>
+                <div class="analyse-rule"></div>
+              </div>
+              <p class="analyse-desc">Die Evaluation bestätigt Vector vCDM als optimale Lösung – ergänzt durch einen Parameter Converter für fehlende Formate.</p>
+              <ul class="analyse-list">
+                <li><i class="fa-solid fa-circle-check"></i> Vector vCDM ausgewählt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Herstellerpräsentation durchgeführt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Praktische Evaluation abgeschlossen</li>
+                <li><i class="fa-solid fa-circle-check"></i> Parameter Converter ergänzt</li>
+                <li><i class="fa-solid fa-circle-check"></i> Zielprozess definiert und dokumentiert</li>
+              </ul>
+              <button class="analyse-back-btn" type="button" onclick="window.showMethodSubSlide('methodEntscheidungSlide1')"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+            </div>
+            <div class="analyse-right">
+              <h3 class="analyse-panel-head" style="color: var(--yellow)">ERGEBNIS DER ENTSCHEIDUNG</h3>
+              <div class="analyse-result-row">
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-database"></i>
+                  <strong>VECTOR vCDM GEWÄHLT</strong>
+                  <p>Spezialisiertes Tool für Parametermanagement mit Versionierung und Freigabeworkflow.</p>
+                  <div class="analyse-detail-stack" aria-label="vCDM Herstellerangaben">
+                    <a class="analyse-detail-link" href="assets/docs/vCDM_ProductInformation_EN.pdf" target="_blank" rel="noopener">
+                      Produktinfo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <a class="analyse-detail-link" href="assets/docs/vCDMstudio_FactSheet_DE.pdf" target="_blank" rel="noopener">
+                      Fact Sheet <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                  </div>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-plug"></i>
+                  <strong>PARAMETER CONVERTER</strong>
+                  <p>Ergänzungslösung für fehlende Formatunterstützung (A2L, CSV, DCM).</p>
+                  <a class="analyse-detail-link" href="parameter_converter_ueberblick.html" target="_blank" rel="noopener">
+                    Details anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-route"></i>
+                  <strong>ZIELPROZESS DEFINIERT</strong>
+                  <p>Neuer Parameterverwaltungsprozess mit vCDM als zentralem System.</p>
+                  <a class="analyse-detail-link" href="bedienungsanleitung_vcdm.html" target="_blank" rel="noopener">
+                    Bedienungsanleitung <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card">
+                  <i class="fa-solid fa-users-gear"></i>
+                  <strong>STAKEHOLDER EINBEZOGEN</strong>
+                  <p>Entscheidung mit Entwicklung, IT und Management abgestimmt.</p>
+                  <a class="analyse-detail-link" href="toolbewertung_forms_im_kramer_design.html" target="_blank" rel="noopener">
+                    Umfrage anzeigen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  </a>
+                </div>
+                <i class="fa-solid fa-chevron-right analyse-result-arrow"></i>
+                <div class="analyse-result-card"><i class="fa-solid fa-flag-checkered"></i><strong>EMPFEHLUNG DOKUMENTIERT</strong><p>Begründete Empfehlung als Basis für die Implementierung festgehalten.</p></div>
+              </div>
+              <div class="analyse-bottom-nav">
+                <div class="analyse-dots"><span></span><span></span><span></span><span></span><span class="active"></span></div>
+                <button class="analyse-weiter-btn" type="button" onclick="window.completeMethodStep()">WEITER <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="methodDetailView" class="method-subslide method-detail-view" aria-live="polite">
+          <nav id="methodPhaseNav" class="method-phase-nav" aria-label="Methodik Phasen"></nav>
+          <article class="method-detail-slide">
+            <div id="methodVisual" class="method-visual"></div>
+            <div class="method-detail-content">
+              <p id="methodDetailKicker"></p>
+              <h3 id="methodDetailTitle"></h3>
+              <strong id="methodDetailSubtitle"></strong>
+              <span id="methodDetailText"></span>
+              <ul id="methodDetailBullets"></ul>
+              <div class="method-detail-actions">
+                <button id="methodBackButton" type="button"><i class="fa-solid fa-arrow-left"></i> Zurück</button>
+                <button id="methodOverviewButton" type="button">Zurück zur Methodik-Übersicht</button>
+                <button id="methodDetailNext" type="button">Weiter <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="process" class="screen process-screen" data-focus="hall">
+        <div class="screen-title reveal">
+          <p><mark>03</mark> Anwendung & Lösung</p>
+          <h2>Neuer Parametermanagementprozess</h2>
+        </div>
+        <a class="process-experience-panel reveal" href="parameterprozess_erleben.html" target="_blank" rel="noopener" aria-label="Neuen Parametermanagement-Prozess erleben">
+          <span class="process-panel-kicker">Interaktive Prozessansicht</span>
+          <strong>Neuen Parametermanagement-Prozess erleben</strong>
+          <span class="process-panel-action">
+            Öffnen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
+        </a>
+      </section>
+
+      <section id="converter" class="screen converter-screen" data-focus="hall">
+        <div class="screen-title converter-slide-title reveal">
+          <p><mark>03</mark> Anwendung &amp; Lösung</p>
+          <h2>Parameter Converter Eigenentwicklung</h2>
+        </div>
+        <div class="converter-showcase reveal">
+          <aside class="converter-intro-panel">
+            <p>Parameter Converter</p>
+            <h2>Was er kann.<br>Was er bringt.</h2>
+            <div class="converter-rule"></div>
+            <p class="converter-copy">Unsere Eigenentwicklung automatisiert die Umwandlung von Parameterdaten zwischen verschiedenen Formaten und unterstützt den kompletten Prozess - von der Analyse bis zum Export.</p>
+            <ul class="converter-benefits">
+              <li><i class="fa-solid fa-circle-check"></i> Schnelle &amp; zuverlässige Konvertierung</li>
+              <li><i class="fa-solid fa-circle-check"></i> Unterstützt A2L, CDFX, vCDM &amp; mehr</li>
+              <li><i class="fa-solid fa-circle-check"></i> Intelligente Validierung &amp; Prüfungen</li>
+              <li><i class="fa-solid fa-circle-check"></i> Integrierter Chatbot für schnelle Hilfe</li>
+              <li><i class="fa-solid fa-circle-check"></i> Maximale Datenqualität &amp; Transparenz</li>
+              <li><i class="fa-solid fa-circle-check"></i> Entwickelt für den Praxisalltag</li>
+            </ul>
+          </aside>
+
+          <section class="converter-functions-panel" aria-label="Kernfunktionen des Parameter Converters">
+            <div class="converter-functions-title">
+              <span></span>
+              <h3>Kernfunktionen</h3>
+              <span></span>
+            </div>
+            <div class="converter-function-grid">
+              <article>
+                <i class="fa-solid fa-robot"></i>
+                <strong>Chatbot Assistent</strong>
+                <p>Stelle Fragen zu Formaten, Fehlern oder Funktionen - der integrierte Chatbot liefert sofort Antworten.</p>
+              </article>
+              <article>
+                <i class="fa-solid fa-diagram-project"></i>
+                <strong>Geführter Workflow</strong>
+                <p>Ein strukturierter, geführter Workflow begleitet dich sicher durch den gesamten Prozess.</p>
+              </article>
+              <article>
+                <i class="fa-solid fa-file-circle-check"></i>
+                <strong>Dateiformate umwandeln</strong>
+                <p>Konvertiere Parameterdaten zwischen A2L, CDFX, vCDM, XML und weiteren Formaten.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="vcdm" class="screen vcdm-info-screen" data-focus="hall">
+        <div class="screen-title reveal">
+          <p><mark>03</mark> Anwendung &amp; Lösung</p>
+          <h2>vCDM als Zielsystem</h2>
+        </div>
+        <div class="vcdm-info-layout reveal">
+          <article class="vcdm-info-panel">
+            <p>Vector Calibration Data Management</p>
+            <h3>Zentrale Plattform für Parameterdaten</h3>
+            <span>vCDM bündelt Kalibrierdaten, Versionierung und Freigabeprozesse in einem nachvollziehbaren System. Dadurch entsteht eine einheitliche Datenbasis für Entwicklung, Service und Qualitätssicherung.</span>
+            <ul>
+              <li><i class="fa-solid fa-database"></i> Zentrale und strukturierte Datenhaltung</li>
+              <li><i class="fa-solid fa-shield-halved"></i> Nachvollziehbarkeit durch Versionierung und Rechte</li>
+              <li><i class="fa-solid fa-diagram-project"></i> Grundlage für einen geführten Zielprozess</li>
+            </ul>
+          </article>
+          <aside class="vcdm-info-visual" aria-label="vCDM Visualisierung">
+            <img src="assets/images/vcdm/kennfeld.png" alt="vCDM Studio Oberfläche mit Kennfeld" />
+          </aside>
+        </div>
+      </section>
+
+      <section id="sharepoint" class="screen sharepoint-screen" data-focus="sharepoint">
+        <div class="screen-title reveal">
+          <p><mark>05</mark> Projektdokumentation</p>
+          <h2>Projektdateien einsehen</h2>
+        </div>
+        <a
+          class="sharepoint-panel reveal"
+          href="https://wackerneuson.sharepoint.com/sites/swmod/Shared%20Documents/Forms/AllItems.aspx?csf=1&amp;web=1&amp;e=yMMGst&amp;ovuser=5fa9dceb%2D3b83%2D4941%2D92e6%2Dc2b378ce92e3%2CDavid%2EAmmann%40wackerneuson%2Ecom&amp;TeamsCID=9cd595e3%2Dfa2d%2D421e%2D892d%2D4650df4244d0&amp;OR=Teams%2DHL&amp;CT=1782719235179&amp;clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNjA0MzAxOTIxNiIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D&amp;CID=594822a2%2D60d7%2D1001%2Dd10e%2Da26d0014d3b5&amp;cidOR=SPO&amp;FolderCTID=0x0120009BA7924F3B2A6E44B871DF586103ACC5&amp;id=%2Fsites%2Fswmod%2FShared%20Documents%2F01%5FWissensdatenbank%5FKnowledge%20Base%2FVector%20vCDM%20%2D%20Parametermanagement"
+          target="_blank"
+          rel="noopener"
+          aria-label="SharePoint der Arbeit öffnen"
+        >
+          <span>Zum SharePoint der Arbeit</span>
+          <strong>Projektdateien selbst ansehen</strong>
+          <em>Öffnet den SharePoint-Ordner mit den Unterlagen zur Arbeit.</em>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </section>
+
+    </main>
+
+    <script src="js/vendor/gsap.min.js"></script>
+    <script src="js/vendor/ScrollTrigger.min.js"></script>
+    <script src="js/roadmap.js?v=entscheidung-details-01"></script>
+    <script src="js/animations.js?v=entscheidung-details-01"></script>
+    <script src="js/main.js?v=sharepoint-final-01"></script>
+  </body>
+</html>

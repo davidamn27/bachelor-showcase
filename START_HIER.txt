@@ -1,0 +1,11 @@
+So startest du die Praesentation:
+
+1. ZIP-Datei entpacken.
+2. Den entpackten Ordner "Bachelor_Showcase" oeffnen.
+3. Auf Mac: START_MAC.command doppelklicken.
+4. Auf Windows: START_WINDOWS.bat doppelklicken.
+
+Danach oeffnet sich:
+http://127.0.0.1:5503/index.html
+
+Wichtig: Der 127.0.0.1-Link funktioniert nur auf dem Computer, auf dem diese Start-Datei gerade laeuft.

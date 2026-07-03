@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 138" role="img" aria-labelledby="title desc">
+  <title id="title">KRAMER on the safe side</title>
+  <desc id="desc">Kramer Wortmarke mit Claim on the safe side</desc>
+  <text x="0" y="62"
+    font-family="Arial Black, Arial, Helvetica, sans-serif"
+    font-size="68"
+    font-weight="900"
+    fill="#4c5959"
+    letter-spacing="-1">KRAMER</text>
+  <text x="134" y="126"
+    font-family="Bradley Hand, Brush Script MT, Segoe Script, Comic Sans MS, cursive"
+    font-size="48"
+    font-style="italic"
+    fill="#111111">on the safe side</text>
+  <path d="M262 136 C326 146, 404 136, 515 117"
+    fill="none"
+    stroke="#111111"
+    stroke-width="4"
+    stroke-linecap="round"/>
+</svg>

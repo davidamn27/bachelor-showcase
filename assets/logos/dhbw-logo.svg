@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 185" role="img" aria-labelledby="title desc">
+  <title id="title">DHBW Ravensburg</title>
+  <desc id="desc">Logo der Dualen Hochschule Baden-Württemberg Ravensburg</desc>
+  <defs>
+    <style>
+      .red{fill:#e30613}.darkred{fill:#9b0f19}.gray{fill:#87929a}.textred{fill:#e30613}.textgray{fill:#68737a}
+    </style>
+  </defs>
+  <g transform="translate(0 8)">
+    <polygon class="red" points="0,90 0,38 51,0 51,58"/>
+    <polygon class="darkred" points="51,58 51,0 88,0 88,95"/>
+    <polygon class="gray" points="88,95 88,31 146,31 146,95"/>
+    <polygon class="gray" points="0,98 0,146 45,98"/>
+  </g>
+  <g transform="translate(185 42)">
+    <text x="0" y="45" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="60" letter-spacing="0">
+      <tspan class="textred">DHB</tspan><tspan class="textgray">W</tspan>
+    </text>
+    <text class="textgray" x="0" y="78" font-family="Arial, Helvetica, sans-serif" font-size="23">Duale Hochschule</text>
+    <text class="textgray" x="0" y="106" font-family="Arial, Helvetica, sans-serif" font-size="23">Baden-Württemberg</text>
+    <text class="textgray" x="0" y="140" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="23">Ravensburg</text>
+  </g>
+</svg>

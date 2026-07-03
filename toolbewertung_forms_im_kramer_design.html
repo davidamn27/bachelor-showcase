@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auswertung Toolbewertung · Parametermanagement</title>
+<style>
+:root{
+  --yellow:#f5c400;
+  --text:#f5f7fa;
+  --muted:rgba(245,247,250,.72);
+  --muted2:rgba(245,247,250,.55);
+  --bg:#020406;
+  --panel:rgba(7,12,17,.74);
+  --panel2:rgba(10,16,22,.56);
+  --line:rgba(255,255,255,.14);
+  --red:#ff3b46;
+  --green:#28d17c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#020406;color:var(--text);font-family:"Segoe UI",Arial,sans-serif}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.83),rgba(0,0,0,.50),rgba(0,0,0,.86)),
+    radial-gradient(circle at 72% 10%,rgba(245,196,0,.15),transparent 24%),
+    radial-gradient(circle at 18% 86%,rgba(0,130,150,.12),transparent 22%),
+    linear-gradient(135deg,#151b22,#020406 70%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  opacity:.55;
+}
+.page{width:min(1540px,calc(100vw - 56px));margin:0 auto;padding:34px 0 80px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:40px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:250px;height:auto;display:block;filter:drop-shadow(0 10px 22px rgba(0,0,0,.38))}
+.brand h1{margin:0;font-size:30px;letter-spacing:.09em}
+.brand small{display:block;color:var(--muted);font-style:italic;margin-top:-2px}
+.badge{background:var(--yellow);color:#111;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 0 32px rgba(245,196,0,.25)}
+.hero{display:grid;grid-template-columns:1.02fr .98fr;gap:26px;align-items:stretch;margin-bottom:28px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.46);backdrop-filter:blur(11px)}
+.intro{padding:38px}
+.kicker{color:var(--yellow);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:13px;margin-bottom:12px}
+.title{font-size:clamp(38px,4.6vw,68px);line-height:.96;margin:0 0 18px;text-transform:uppercase;letter-spacing:.035em}
+.subtitle{font-size:20px;color:var(--muted);line-height:1.5;max-width:860px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
+.stat strong{display:block;color:var(--yellow);font-size:38px;line-height:1}
+.stat span{display:block;color:var(--muted);font-weight:700;margin-top:8px}
+.summary-panel{padding:28px;display:grid;gap:14px}
+.score-card{display:grid;grid-template-columns:170px 1fr;gap:22px;align-items:center;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:20px;padding:22px}
+.score{font-size:70px;line-height:1;color:var(--yellow);font-weight:300}
+.stars{font-size:30px;letter-spacing:3px;color:var(--yellow);margin-top:10px}
+.score-text{font-size:18px;color:var(--muted);line-height:1.45}
+.insight-list{display:grid;gap:12px;margin-top:6px}
+.insight{border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:16px;padding:14px 16px;color:var(--muted);line-height:1.45}
+.insight strong{color:var(--text)}
+.section-title{display:flex;align-items:center;gap:16px;margin:38px 0 16px}
+.section-title h2{margin:0;color:var(--yellow);letter-spacing:.12em;text-transform:uppercase;font-size:20px}
+.section-title::after{content:"";height:1px;background:rgba(255,255,255,.24);flex:1}
+.question-block{
+  background:rgba(7,12,17,.68);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:26px;
+  margin-bottom:22px;
+  box-shadow:0 18px 70px rgba(0,0,0,.34);
+  backdrop-filter:blur(10px);
+}
+.question-head{display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:start;margin-bottom:22px}
+.q-number{width:54px;height:54px;border-radius:15px;background:var(--yellow);color:#111;display:grid;place-items:center;font-size:22px;font-weight:900}
+.question-head h3{margin:0;font-size:24px;line-height:1.35;color:var(--text)}
+.responses{color:#111;background:var(--yellow);border-radius:999px;padding:9px 13px;font-weight:900;white-space:nowrap}
+.chart{display:grid;gap:13px}
+.row{display:grid;grid-template-columns:150px 1fr 60px;gap:16px;align-items:center}
+.row .label{font-weight:800;color:var(--text)}
+.track{height:18px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--yellow),#ffe681)}
+.row b{color:var(--yellow);font-size:18px}
+.rating-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.big-rating{text-align:center;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:20px;padding:24px}
+.big-rating .value{font-size:88px;line-height:1;color:var(--yellow);font-weight:300}
+.star-scale{display:flex;justify-content:center;gap:22px;margin-top:18px}
+.star-item{display:grid;gap:8px;justify-items:center;color:var(--muted)}
+.star-icon{font-size:36px;color:var(--yellow)}
+.text-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.quote-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:18px;padding:20px}
+.quote-card h4{margin:0 0 12px;color:var(--yellow);font-size:17px;line-height:1.35}
+.quote{color:rgba(245,247,250,.88);font-size:16px;line-height:1.6;white-space:pre-wrap}
+.note{margin-top:18px;color:var(--muted2);font-size:13px;line-height:1.5}
+.footer{margin-top:24px;color:rgba(245,247,250,.50);font-size:13px}
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .question-head{grid-template-columns:54px 1fr}
+  .responses{grid-column:2}
+  .rating-wrap{grid-template-columns:1fr}
+  .text-grid{grid-template-columns:1fr}
+  .row{grid-template-columns:110px 1fr 48px}
+  .page{width:calc(100vw - 28px)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">
+      <img class="logo" src="assets/logos/kramer-logo.svg?v=kramer-logo-03" alt="Kramer on the safe side">
+    </div>
+    <div class="badge">Microsoft Forms · Toolbewertung</div>
+  </header>
+
+  <section class="hero">
+    <div class="panel intro">
+      <div class="kicker">Evaluierung · Parametermanagement</div>
+      <h1 class="title">Bewertung des<br>Parametermanagement-Tools</h1>
+      <p class="subtitle">
+        Zusammenfassung der Forms-Ergebnisse zur Einführung eines Parametermanagement-Tools
+        im Hinblick auf die Anforderungen bei Kramer / Weidemann / Wacker Neuson.
+      </p>
+      <div class="stats">
+        <div class="stat"><strong>9</strong><span>Antworten</span></div>
+        <div class="stat"><strong>4,67</strong><span>Ø Bewertung</span></div>
+        <div class="stat"><strong>88%</strong><span>Einführung sinnvoll</span></div>
+        <div class="stat"><strong>100%</strong><span>Verbesserung erwartet</span></div>
+      </div>
+    </div>
+
+    <div class="panel summary-panel">
+      <div class="kicker">Kernaussage</div>
+      <div class="score-card">
+        <div>
+          <div class="score">4,67</div>
+          <div class="stars">★★★★☆</div>
+        </div>
+        <p class="score-text">
+          Die Bewertung fällt insgesamt sehr positiv aus. Besonders stark wird das Potenzial gesehen,
+          das aktuelle Parameterhandling zu verbessern und transparenter zu gestalten.
+        </p>
+      </div>
+      <div class="insight-list">
+        <div class="insight"><strong>Hohe Zustimmung:</strong> 66% bewerten die Einführung klar als sinnvoll, weitere 22% eher sinnvoll.</div>
+        <div class="insight"><strong>Verbesserungspotenzial:</strong> 75% sehen eine klare Verbesserung des aktuellen Parameterhandlings.</div>
+        <div class="insight"><strong>Kritischer Punkt:</strong> Mehrfach genannt werden zusätzliche Lizenzkosten und Zuständigkeiten.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Quantitative Ergebnisse</h2></div>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div class="q-number">01</div>
+      <h3>Wie bewerten Sie das vorgestellte Parametermanagement-Tool im Hinblick auf die Anforderungen bei Kramer / Weidemann / Wacker Neuson?</h3>
+      <div class="responses">9 Antworten</div>
+    </div>
+    <div class="rating-wrap">
+      <div class="big-rating">
+        <div class="value">4,67</div>
+        <div class="stars">★★★★☆</div>
+      </div>
+      <div class="star-scale">
+        <div class="star-item"><div class="star-icon">★</div><b>0%</b></div>
+        <div class="star-item"><div class="star-icon">★</div><b>0%</b></div>
+        <div class="star-item"><div class="star-icon">★</div><b>0%</b></div>
+        <div class="star-item"><div class="star-icon">★</div><b>33%</b></div>
+        <div class="star-item"><div class="star-icon">☆</div><b>66%</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div class="q-number">02</div>
+      <h3>Halten Sie die Einführung dieses Tools bei Kramer / Weidemann / Wacker Neuson für sinnvoll?</h3>
+      <div class="responses">9 Antworten</div>
+    </div>
+    <div class="chart">
+      <div class="row"><div class="label">Ja</div><div class="track"><div class="fill" style="width:66%"></div></div><b>66%</b></div>
+      <div class="row"><div class="label">Eher ja</div><div class="track"><div class="fill" style="width:22%"></div></div><b>22%</b></div>
+      <div class="row"><div class="label">Neutral</div><div class="track"><div class="fill" style="width:11%"></div></div><b>11%</b></div>
+      <div class="row"><div class="label">Eher nein</div><div class="track"><div class="fill" style="width:0%"></div></div><b>0%</b></div>
+      <div class="row"><div class="label">Nein</div><div class="track"><div class="fill" style="width:0%"></div></div><b>0%</b></div>
+    </div>
+  </section>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div class="q-number">03</div>
+      <h3>Sind Sie der Meinung, dass das Tool das aktuelle Parameterhandling verbessern würde?</h3>
+      <div class="responses">9 Antworten</div>
+    </div>
+    <div class="chart">
+      <div class="row"><div class="label">Ja</div><div class="track"><div class="fill" style="width:75%"></div></div><b>75%</b></div>
+      <div class="row"><div class="label">Eher ja</div><div class="track"><div class="fill" style="width:25%"></div></div><b>25%</b></div>
+      <div class="row"><div class="label">Neutral</div><div class="track"><div class="fill" style="width:0%"></div></div><b>0%</b></div>
+      <div class="row"><div class="label">Eher nein</div><div class="track"><div class="fill" style="width:0%"></div></div><b>0%</b></div>
+      <div class="row"><div class="label">Nein</div><div class="track"><div class="fill" style="width:0%"></div></div><b>0%</b></div>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Offene Antworten</h2></div>
+
+  <section class="question-block">
+    <div class="question-head">
+      <div class="q-number">04</div>
+      <h3>Was sind aus Ihrer Sicht die wichtigsten Gründe für Ihre Bewertung?</h3>
+      <div class="responses">9 Antworten</div>
+    </div>
+    <div class="text-grid">
+      <article class="quote-card">
+        <h4>Transparenz & Handling</h4>
+        <div class="quote">„Transparenz und Übersichtlichkeit Exportmöglichkeiten, komfortables Handling der Daten. Fraglich ist aber, ob die Kosten gerechtfertigt sind. Alternativ sehe ich eine klassische Versionsverwaltung, die schon im Konzern verwendet wird.“</div>
+      </article>
+      <article class="quote-card">
+        <h4>Lizenzkosten & Zuständigkeiten</h4>
+        <div class="quote">„Das Tool wirkt grundsätzlich solide. Meine Bedenken sind hauptsächlich die zusätzlichen Lizenzkosten. Aufgrund der wachsenden Anzahl von Steuergeräten in der Maschine wächst auch die Anzahl der entsprechenden Ansprechpartner, die idealerweise auch über das Tool für die Erstellung der Parameter zuständig sind. Die größere Anzahl an Personen erhöht dann allerdings die Lizenzkosten oder die Erstellung der Parameterfiles muss an jemanden delegiert werden, der nicht so vertraut ist mit dem Projekt oder der Komponente.“</div>
+      </article>
+      <article class="quote-card">
+        <h4>Anforderungen erfüllt</h4>
+        <div class="quote">„Tool erfüllt die Anforderungen die wir benötigen.“</div>
+      </article>
+      <article class="quote-card">
+        <h4>Sauberes Handling</h4>
+        <div class="quote">„Sauberes und professionelles Handling der Parameter.“</div>
+      </article>
+      <article class="quote-card">
+        <h4>Nachvollziehbarkeit</h4>
+        <div class="quote">„Nachvollziehbar in allen Belangen.“</div>
+      </article>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Einordnung für die Bachelorarbeit</h2></div>
+  <section class="question-block">
+    <div class="question-head">
+      <div class="q-number">05</div>
+      <h3>Zusammenfassende Interpretation</h3>
+      <div class="responses">Auswertung</div>
+    </div>
+    <div class="text-grid">
+      <article class="quote-card">
+        <h4>Stärken des Tools</h4>
+        <div class="quote">Die Ergebnisse zeigen eine deutliche Zustimmung zur Einführung eines Parametermanagement-Tools. Besonders positiv werden Transparenz, Übersichtlichkeit, Nachvollziehbarkeit und ein professionellerer Umgang mit Parameterdaten bewertet.</div>
+      </article>
+      <article class="quote-card">
+        <h4>Kritische Punkte</h4>
+        <div class="quote">Neben der positiven Bewertung werden vor allem Kosten, Lizenzmodell und organisatorische Zuständigkeiten als offene Punkte genannt. Diese Aspekte sollten bei der weiteren Bewertung und Einführung berücksichtigt werden.</div>
+      </article>
+    </div>
+    <div class="note">Hinweis: Die HTML wurde aus den sichtbaren Microsoft-Forms-Screenshots nachgebaut und im Design der vorhandenen Auswertungs-HTML gestaltet.</div>
+  </section>
+
+  <footer class="footer">Erstellt für die Ergebnisdarstellung der Toolbewertung · Parametermanagement</footer>
+</div>
+</body>
+</html>

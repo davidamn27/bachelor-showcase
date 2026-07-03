@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parameter Converter · HTML-Überblick</title>
+<style>
+:root{
+  --yellow:#f5c400;
+  --bg:#020406;
+  --panel:rgba(7,12,17,.76);
+  --panel2:rgba(10,16,22,.56);
+  --text:#f5f7fa;
+  --muted:rgba(245,247,250,.72);
+  --muted2:rgba(245,247,250,.52);
+  --line:rgba(255,255,255,.15);
+  --green:#56e58a;
+  --red:#ff7676;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#020406;color:var(--text);font-family:"Segoe UI",Arial,sans-serif}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.48),rgba(0,0,0,.82)),
+    radial-gradient(circle at 72% 16%,rgba(245,196,0,.16),transparent 26%),
+    linear-gradient(135deg,#151b22,#020406 70%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  opacity:.55;
+}
+.page{width:min(1540px,calc(100vw - 56px));margin:0 auto;padding:34px 0 80px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:42px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:250px;height:auto;display:block;filter:drop-shadow(0 10px 22px rgba(0,0,0,.38))}
+.brand h1{margin:0;font-size:30px;letter-spacing:.09em}
+.brand small{display:block;color:var(--muted);font-style:italic;margin-top:-2px}
+.badge{background:var(--yellow);color:#111;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 0 32px rgba(245,196,0,.25)}
+.hero{display:grid;grid-template-columns:1fr .95fr;gap:26px;align-items:stretch;margin-bottom:28px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.46);backdrop-filter:blur(11px)}
+.intro{padding:38px}
+.kicker{color:var(--yellow);font-weight:900;letter-spacing:.18em;text-transform:uppercase;font-size:13px;margin-bottom:12px}
+.title{font-size:clamp(42px,5vw,72px);line-height:.96;margin:0 0 18px;text-transform:uppercase;letter-spacing:.035em}
+.subtitle{font-size:20px;color:var(--muted);line-height:1.5;max-width:820px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.stat{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
+.stat strong{display:block;color:var(--yellow);font-size:38px;line-height:1}
+.stat span{display:block;color:var(--muted);font-weight:700;margin-top:8px}
+.section-title{display:flex;align-items:center;gap:16px;margin:38px 0 16px}
+.section-title h2{margin:0;color:var(--yellow);letter-spacing:.12em;text-transform:uppercase;font-size:20px}
+.section-title::after{content:"";height:1px;background:rgba(255,255,255,.24);flex:1}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.step{position:relative;padding:24px;border:1px solid var(--line);border-radius:20px;background:rgba(9,15,21,.56);min-height:210px}
+.step .nr{width:42px;height:42px;border-radius:50%;background:var(--yellow);color:#111;display:grid;place-items:center;font-weight:900;margin-bottom:18px}
+.step h3{margin:0 0 10px;color:var(--text);font-size:20px}
+.step p{margin:0;color:var(--muted);line-height:1.45}
+.step:not(:last-child)::after{content:"›";position:absolute;right:-15px;top:45%;color:var(--yellow);font-size:40px;font-weight:900;z-index:3}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:24px;border:1px solid var(--line);border-radius:20px;background:rgba(9,15,21,.56)}
+.card h3{margin:0 0 12px;color:var(--yellow);font-size:21px}
+.card p,.card li{color:var(--muted);line-height:1.5}
+.card ul{margin:0;padding-left:20px}
+.pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.pill{padding:9px 12px;border-radius:999px;background:rgba(245,196,0,.12);border:1px solid rgba(245,196,0,.36);color:var(--yellow);font-weight:800}
+.table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--line);background:rgba(5,9,13,.64)}
+table{width:100%;border-collapse:collapse;min-width:800px}
+th,td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);vertical-align:top}
+th{background:rgba(5,9,13,.96);color:var(--yellow);text-align:left;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+td{color:rgba(245,247,250,.86);font-size:14px;line-height:1.45}
+.codebox{font-family:"Consolas","Courier New",monospace;font-size:13px;line-height:1.5;white-space:pre-wrap;color:rgba(245,247,250,.82);background:rgba(0,0,0,.32);border:1px solid var(--line);border-radius:18px;padding:18px;max-height:430px;overflow:auto}
+.footer{margin-top:24px;color:rgba(245,247,250,.50);font-size:13px}
+@media(max-width:1100px){.hero{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.cards{grid-template-columns:1fr 1fr}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.flow,.cards{grid-template-columns:1fr}.page{width:calc(100vw - 28px)}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="header">
+    <div class="brand">
+      <img class="logo" src="assets/logos/kramer-logo.svg?v=kramer-logo-03" alt="Kramer on the safe side">
+    </div>
+    <div class="badge">Parameter Converter · Code-Überblick</div>
+  </header>
+
+  <section class="hero">
+    <div class="panel intro">
+      <div class="kicker">Anwendung · Parameter Converter</div>
+      <h1 class="title">Was macht das Tool?</h1>
+      <p class="subtitle">
+        Diese HTML gibt einen groben Überblick über den hochgeladenen Python-Code und zeigt, wie der Parameter Converter im Parametermanagement-Prozess eingeordnet werden kann.
+      </p>
+      <div class="stats">
+        <div class="stat"><strong>11</strong><span>Klassen</span></div>
+        <div class="stat"><strong>100</strong><span>Funktionen</span></div>
+        <div class="stat"><strong>16</strong><span>Imports</span></div>
+        <div class="stat"><strong>7</strong><span>Dateiformate</span></div>
+      </div>
+    </div>
+    <div class="panel intro">
+      <div class="kicker">Kurzbeschreibung</div>
+      <p class="subtitle">Parameter Converter
+Konvertiert Lieferformate, Excel, A2L und CDFX in A2L, CDFX oder
+Wacker-Neuson-PARAMETERDATA-XML. Die Konvertierungslogik kann per GUI,
+CLI-Agent oder natuerlicher Sprache angesteuert werden.</p>
+      <div class="pill-row"><span class="pill">.A2L</span><span class="pill">.CDFX</span><span class="pill">.HEX</span><span class="pill">.PAR</span><span class="pill">.XLS</span><span class="pill">.XLSX</span><span class="pill">.XML</span></div>
+    </div>
+  </section>
+
+  <div class="section-title"><h2>Prozessüberblick</h2></div>
+  <section class="flow">
+    <article class="step"><div class="nr">1</div><h3>Datei auswählen</h3><p>A2L, CDFX, XML, Excel oder andere Parameterdatei bereitstellen.</p></article><article class="step"><div class="nr">2</div><h3>Einlesen &amp; Parsen</h3><p>Parameter, Werte, Einheiten und Metadaten werden aus der Datei extrahiert.</p></article><article class="step"><div class="nr">3</div><h3>Interne Struktur</h3><p>Daten werden vereinheitlicht und für die Weiterverarbeitung vorbereitet.</p></article><article class="step"><div class="nr">4</div><h3>Validieren</h3><p>Prüfung auf Vollständigkeit, Formatlogik und mögliche Fehlerstellen.</p></article><article class="step"><div class="nr">5</div><h3>Exportieren</h3><p>Ausgabe in Zielstruktur, z. B. vCDM-/CDFX-/XML-orientierter Workflow.</p></article>
+  </section>
+
+  <div class="section-title"><h2>Einordnung</h2></div>
+  <section class="cards">
+    <article class="card">
+      <h3>Zweck</h3>
+      <ul><li>liest und verarbeitet Parameterdaten aus unterschiedlichen Liefer- und Arbeitsformaten</li><li>führt die Daten in einer gemeinsamen internen Struktur zusammen</li><li>ermöglicht Umwandlung und Export in Ziel-/Arbeitsformate</li><li>unterstützt Validierung, Nachvollziehbarkeit und eine spätere Prozessintegration</li><li>enthält eine grafische Oberfläche für die Bedienung unter Windows</li></ul>
+    </article>
+    <article class="card">
+      <h3>Rolle im Zielprozess</h3>
+      <p>Der Converter kann als Brücke zwischen bestehenden Lieferanten-/Arbeitsformaten und einem strukturierten Parametermanagement mit vCDM dienen.</p>
+    </article>
+    <article class="card">
+      <h3>Nutzen</h3>
+      <p>Manuelle Formatumwandlungen werden reduziert, Daten werden reproduzierbarer verarbeitet und die Grundlage für Versionierung, Vergleich und Freigabe verbessert.</p>
+    </article>
+  </section>
+
+  <div class="section-title"><h2>Erkannte Klassen</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Klasse</th><th>Methoden</th></tr></thead>
+      <tbody>
+      <tr>
+        <td>Parameter</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>AgentRequest</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>ValidationIssue</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>ValidationReport</td>
+        <td>add</td>
+      </tr>
+    
+      <tr>
+        <td>TargetFormatRule</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>ExcelConfig</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>ChatMessage</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>ProjectRecord</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>ChatRecord</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>WNReferenceEntry</td>
+        <td>—</td>
+      </tr>
+    
+      <tr>
+        <td>A2LConverterApp</td>
+        <td>__init__, _rounded_frame, _default_project, _default_project_id, _root_project_ids, _default_chat, …</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+  <div class="section-title"><h2>Erkannte Funktionen</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Funktion</th><th>Argumente</th></tr></thead>
+      <tbody>
+      <tr>
+        <td>_match_case</td>
+        <td>source, target</td>
+      </tr>
+    
+      <tr>
+        <td>_ui_text</td>
+        <td>text</td>
+      </tr>
+    
+      <tr>
+        <td>_bundle_base_dir</td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <td>_app_base_dir</td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <td>_resource_path</td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <td>_fallback_data_dir</td>
+        <td></td>
+      </tr>
+    
+      <tr>
+        <td>_writable_app_path</td>
+        <td>filename</td>
+      </tr>
+    
+      <tr>
+        <td>simple_prompt</td>
+        <td>parent, title, prompt</td>
+      </tr>
+    
+      <tr>
+        <td>_safe</td>
+        <td>name</td>
+      </tr>
+    
+      <tr>
+        <td>_safe_a2l_identifier</td>
+        <td>name</td>
+      </tr>
+    
+      <tr>
+        <td>_a2l_string</td>
+        <td>text, max_len</td>
+      </tr>
+    
+      <tr>
+        <td>_a2l_comment</td>
+        <td>text, max_len</td>
+      </tr>
+    
+      <tr>
+        <td>_validate_a2l_content</td>
+        <td>content</td>
+      </tr>
+    
+      <tr>
+        <td>_xml_text</td>
+        <td>parent, tag, text</td>
+      </tr>
+    
+      <tr>
+        <td>_stringify_value</td>
+        <td>value</td>
+      </tr>
+    
+      <tr>
+        <td>_parse_number</td>
+        <td>text, default</td>
+      </tr>
+    
+      <tr>
+        <td>_format_user_error</td>
+        <td>exc</td>
+      </tr>
+    
+      <tr>
+        <td>_is_quiet_user_error</td>
+        <td>exc</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+
+  <div class="section-title"><h2>Code-Vorschau</h2></div>
+  <div class="codebox">001  #!/usr/bin/env python3
+002  &quot;&quot;&quot;
+003  Parameter Converter
+004  Konvertiert Lieferformate, Excel, A2L und CDFX in A2L, CDFX oder
+005  Wacker-Neuson-PARAMETERDATA-XML. Die Konvertierungslogik kann per GUI,
+006  CLI-Agent oder natuerlicher Sprache angesteuert werden.
+007  &quot;&quot;&quot;
+008  
+009  import argparse
+010  import json
+011  import tkinter as tk
+012  from tkinter import ttk, filedialog, messagebox, scrolledtext, simpledialog
+013  import xml.etree.ElementTree as ET
+014  import re
+015  import os
+016  import shutil
+017  import subprocess
+018  import sys
+019  from dataclasses import dataclass, field
+020  from typing import Any, Callable, Dict, List, NotRequired, Optional, Sequence, Tuple, TypedDict, cast
+021  import datetime
+022  import uuid
+023  from xml.dom import minidom
+024  from openpyxl import Workbook, load_workbook
+025  import xlrd
+026  
+027  APP_BUILD = &quot;2026-04-01.1&quot;
+028  DEFAULT_SAP_BASE_DIR = r&quot;C:\Users\lnzammad\Documents\SAP-Ablageordner&quot;
+029  
+030  _UI_UMLAUT_MAP = {
+031      &quot;abhaengig&quot;: &quot;abhängig&quot;,
+032      &quot;angehaengt&quot;: &quot;angehängt&quot;,
+033      &quot;anhaengen&quot;: &quot;anhängen&quot;,
+034      &quot;anhaengt&quot;: &quot;anhängt&quot;,
+035      &quot;ausgewaehlt&quot;: &quot;ausgewählt&quot;,
+036      &quot;auswaehlen&quot;: &quot;auswählen&quot;,
+037      &quot;enthaelt&quot;: &quot;enthält&quot;,
+038      &quot;fuer&quot;: &quot;für&quot;,
+039      &quot;geoeffnet&quot;: &quot;geöffnet&quot;,
+040      &quot;gewaehlt&quot;: &quot;gewählt&quot;,
+041      &quot;gueltig&quot;: &quot;gültig&quot;,
+042      &quot;gueltige&quot;: &quot;gültige&quot;,
+043      &quot;gueltigen&quot;: &quot;gültigen&quot;,
+044      &quot;gueltiges&quot;: &quot;gültiges&quot;,
+045      &quot;haengt&quot;: &quot;hängt&quot;,
+046      &quot;koennte&quot;: &quot;könnte&quot;,
+047      &quot;koennen&quot;: &quot;können&quot;,
+048      &quot;moeglich&quot;: &quot;möglich&quot;,
+049      &quot;oeffnen&quot;: &quot;öffnen&quot;,
+050      &quot;pruefung&quot;: &quot;prüfung&quot;,
+051      &quot;ueber&quot;: &quot;über&quot;,
+052      &quot;ueberpruefung&quot;: &quot;überprüfung&quot;,
+053      &quot;uebersicht&quot;: &quot;übersicht&quot;,
+054      &quot;ungueltig&quot;: &quot;ungültig&quot;,
+055      &quot;ungueltige&quot;: &quot;ungültige&quot;,
+056      &quot;ungueltigen&quot;: &quot;ungültigen&quot;,
+057      &quot;ungueltiges&quot;: &quot;ungültiges&quot;,
+058      &quot;vorlaeufig&quot;: &quot;vorläufig&quot;,
+059      &quot;waehrend&quot;: &quot;während&quot;,
+060      &quot;waehlen&quot;: &quot;wählen&quot;,
+061      &quot;zurueck&quot;: &quot;zurück&quot;,
+062      &quot;zugehoerig&quot;: &quot;zugehörig&quot;,
+063      &quot;zugehoerigen&quot;: &quot;zugehörigen&quot;,
+064  }
+065  _UI_UMLAUT_RE = re.compile(r&quot;\b(&quot; + &quot;|&quot;.join(sorted(_UI_UMLAUT_MAP.keys(), key=len, reverse=True)) + r&quot;)\b&quot;, re.IGNORECASE)
+066  
+067  
+068  def _match_case(source: str, target: str) -&gt; str:
+069      if source.isupper():
+070          return target.upper()
+071      if source[:1].isupper():
+072          return target[:1].upper() + target[1:]
+073      return target
+074  
+075  
+076  def _ui_text(text: Any) -&gt; Any:
+077      if not isinstance(text, str) or not text:
+078          return text
+079  
+080      def repl(match: re.Match[str]) -&gt; str:
+081          original = match.group(0)
+082          replacement = _UI_UMLAUT_MAP.get(original.lower(), original)
+083          return _match_case(original, replacement)
+084  
+085      return _UI_UMLAUT_RE.sub(repl, text)
+086  
+087  
+088  def _bundle_base_dir() -&gt; str:
+089      if getattr(sys, &quot;frozen&quot;, False):
+090          meipass = getattr(sys, &quot;_MEIPASS&quot;, &quot;&quot;)
+091          if meipass:
+092              return str(meipass)
+093          return os.path.dirname(os.path.abspath(sys.executable))
+094      return os.path.dirname(os.path.abspath(__file__))
+095  
+096  
+097  def _app_base_dir() -&gt; str:
+098      if getattr(sys, &quot;frozen&quot;, False):
+099          return os.path.dirname(os.path.abspath(sys.executable))
+100      return os.path.dirname(os.path.abspath(__file__))
+101  
+102  
+103  def _resource_path(*parts: str) -&gt; str:
+104      return os.path.join(_bundle_base_dir(), *parts)
+105  
+106  
+107  def _fallback_data_dir() -&gt; str:
+108      appdata = os.environ.get(&quot;APPDATA&quot;, &quot;&quot;).strip()
+109      if appdata:
+110          return os.path.join(appdata, &quot;A2L Converter&quot;)</div>
+
+  <div class="footer">
+    Quelle: a2l_converter(1).py · automatisch aus dem hochgeladenen Python-Skript erzeugt.
+  </div>
+</div>
+</body>
+</html>
