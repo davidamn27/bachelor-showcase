@@ -121,7 +121,7 @@
 
       .screenshot-card {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.35fr);
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.28fr);
         gap: 0;
         overflow: hidden;
         border: 1px solid var(--line);
@@ -149,29 +149,49 @@
       .screenshot-note {
         display: grid;
         align-content: center;
-        gap: 18px;
-        padding: clamp(26px, 3vw, 42px);
+        gap: 14px;
+        padding: clamp(22px, 2.35vw, 34px);
       }
 
       .screenshot-note span {
         color: var(--yellow);
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 950;
         text-transform: uppercase;
       }
 
       .screenshot-note h2 {
         margin: 0;
-        font-size: clamp(28px, 2.8vw, 48px);
+        font-size: clamp(26px, 2.15vw, 38px);
         line-height: 1;
       }
 
-      .screenshot-note p {
+      .screenshot-note ul {
+        display: grid;
+        gap: 10px;
         margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .screenshot-note li {
+        position: relative;
+        padding-left: 18px;
         color: var(--muted);
-        font-size: clamp(18px, 1.45vw, 23px);
+        font-size: clamp(16px, 1.15vw, 20px);
         font-weight: 700;
-        line-height: 1.42;
+        line-height: 1.3;
+      }
+
+      .screenshot-note li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.58em;
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--yellow);
       }
 
       .structure-card {
@@ -388,7 +408,11 @@
           <div class="screenshot-note">
             <span>01 Projektkontext</span>
             <h2>Fahrzeugprojekt als Einstieg</h2>
-            <p>Ein Projekt bündelt die relevanten Datenstände und schafft den Rahmen, in dem Software, Varianten und Parameter eindeutig zugeordnet werden.</p>
+            <ul>
+              <li>Projekt bündelt relevante Datenstände</li>
+              <li>Software, Varianten und Parameter sind zugeordnet</li>
+              <li>Gemeinsamer Rahmen für alle Beteiligten</li>
+            </ul>
           </div>
         </article>
 
@@ -399,7 +423,11 @@
           <div class="screenshot-note">
             <span>02 Datensätze</span>
             <h2>Parameterstände zentral sichtbar</h2>
-            <p>Die Ansicht macht deutlich, welche Datensätze zu einem Projekt gehören und welche Informationen für Entwicklung, Qualität oder Service relevant sind.</p>
+            <ul>
+              <li>Datensätze liegen projektbezogen vor</li>
+              <li>Relevante Informationen schneller auffindbar</li>
+              <li>Nutzbar für Entwicklung, Qualität und Service</li>
+            </ul>
           </div>
         </article>
 
@@ -410,7 +438,11 @@
           <div class="screenshot-note">
             <span>03 Versionierung</span>
             <h2>Änderungen nachvollziehen</h2>
-            <p>Versionen und Bearbeitungsstände können direkt am Datensatz eingeordnet werden. Dadurch wird transparent, welcher Stand wofür genutzt wurde.</p>
+            <ul>
+              <li>Versionen direkt am Datensatz sichtbar</li>
+              <li>Bearbeitungsstände klar einordenbar</li>
+              <li>Transparenz über genutzte Datenstände</li>
+            </ul>
           </div>
         </article>
 
@@ -421,7 +453,11 @@
           <div class="screenshot-note">
             <span>04 Freigabe</span>
             <h2>Vom Datensatz zur Nutzung</h2>
-            <p>Freigegebene Stände können gezielter weitergegeben, verglichen oder in nachgelagerte Prozesse wie den Parameter Converter übernommen werden.</p>
+            <ul>
+              <li>Freigegebene Stände gezielt weitergeben</li>
+              <li>Parameterstände vergleichen und prüfen</li>
+              <li>Übergabe an Folgeprozesse vorbereiten</li>
+            </ul>
           </div>
         </article>
       </section>
