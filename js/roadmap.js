@@ -4,6 +4,7 @@ const sections = [
   { id: "situation", label: "Ausgangssituation", focus: { x: "34%", y: "58%", scale: 1.28, brightness: 0.92 } },
   { id: "method", label: "Methodik", focus: { x: "48%", y: "42%", scale: 1.34, brightness: 0.84 } },
   { id: "process", label: "Anwendung & Lösung", focus: { x: "62%", y: "48%", scale: 1.42, brightness: 0.76 } },
+  { id: "vcdm-project", label: "vCDM Projektstruktur", focus: { x: "66%", y: "42%", scale: 1.46, brightness: 0.74 } },
   { id: "converter", label: "Parameter Converter", focus: { x: "70%", y: "44%", scale: 1.5, brightness: 0.74 } },
   { id: "vcdm", label: "vCDM", focus: { x: "78%", y: "35%", scale: 1.58, brightness: 0.72 } },
   { id: "vcdm-possibilities", label: "vCDM Möglichkeiten", focus: { x: "72%", y: "42%", scale: 1.5, brightness: 0.72 } },

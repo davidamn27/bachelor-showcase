@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vCDM-Projektstruktur erleben</title>
+    <link rel="stylesheet" href="css/vendor/fontawesome.min.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --yellow: #ffc400;
+        --bg: #020506;
+        --panel: rgba(8, 13, 16, 0.82);
+        --panel-soft: rgba(255, 255, 255, 0.055);
+        --line: rgba(255, 255, 255, 0.16);
+        --yellow-line: rgba(255, 196, 0, 0.52);
+        --text: #f7f7f2;
+        --muted: rgba(247, 247, 242, 0.68);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background:
+          linear-gradient(90deg, rgba(2, 5, 6, 0.94), rgba(2, 5, 6, 0.7) 48%, rgba(2, 5, 6, 0.92)),
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          url("assets/images/vcdm/vcdm-center.jpeg") center / cover fixed,
+          var(--bg);
+        background-size: auto, 96px 96px, 96px 96px, cover, auto;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: clamp(28px, 5vw, 64px);
+      }
+
+      .brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: clamp(34px, 5vw, 70px);
+      }
+
+      .logo {
+        color: rgba(247, 247, 242, 0.28);
+        font-size: clamp(30px, 3vw, 48px);
+        font-weight: 950;
+        letter-spacing: 0;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: var(--yellow);
+        color: #111;
+        font-weight: 950;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+        gap: clamp(28px, 4vw, 58px);
+        align-items: start;
+      }
+
+      .intro {
+        padding-top: 16px;
+      }
+
+      .kicker {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 16px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .kicker mark {
+        background: none;
+        color: var(--yellow);
+      }
+
+      h1 {
+        max-width: 920px;
+        margin: 0;
+        font-size: clamp(52px, 6vw, 112px);
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        max-width: 780px;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: clamp(20px, 1.8vw, 29px);
+        font-weight: 700;
+        line-height: 1.38;
+      }
+
+      .structure-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 34px 92px rgba(0, 0, 0, 0.44), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(18px);
+        overflow: hidden;
+      }
+
+      .structure-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 26px 30px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .structure-header p {
+        margin: 0;
+        color: var(--muted);
+        font-weight: 850;
+      }
+
+      .structure-header strong {
+        display: block;
+        margin-top: 6px;
+        color: var(--text);
+        font-size: 28px;
+      }
+
+      .status {
+        color: var(--yellow);
+        font-size: 15px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .tree {
+        padding: 30px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .tree-row {
+        display: grid;
+        grid-template-columns: 60px 1fr auto;
+        align-items: center;
+        gap: 18px;
+        min-height: 74px;
+        padding: 14px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: var(--panel-soft);
+      }
+
+      .tree-row i {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        background: rgba(255, 196, 0, 0.14);
+        color: var(--yellow);
+        font-size: 20px;
+      }
+
+      .tree-row p {
+        margin: 0;
+      }
+
+      .tree-row span {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .tree-row strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 22px;
+      }
+
+      .tag {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 196, 0, 0.12);
+        color: var(--yellow);
+        font-size: 13px;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      .value-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: clamp(30px, 4vw, 56px);
+      }
+
+      .value-card {
+        min-height: 210px;
+        padding: 28px;
+        border: 1px solid var(--yellow-line);
+        border-radius: 8px;
+        background: rgba(8, 13, 16, 0.7);
+        backdrop-filter: blur(14px);
+      }
+
+      .value-card i {
+        color: var(--yellow);
+        font-size: 34px;
+        margin-bottom: 24px;
+      }
+
+      .value-card h2 {
+        margin: 0 0 14px;
+        font-size: clamp(24px, 2vw, 34px);
+      }
+
+      .value-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.42;
+      }
+
+      .presentation-back-button {
+        position: fixed;
+        z-index: 99999;
+        left: 24px;
+        bottom: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 18px;
+        border: 1px solid rgba(255, 196, 0, 0.72);
+        border-radius: 999px;
+        background: var(--yellow);
+        color: #090909;
+        font: 900 15px/1.1 "Segoe UI", Arial, sans-serif;
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.42), 0 0 28px rgba(255, 196, 0, 0.24);
+        cursor: pointer;
+      }
+
+      .presentation-back-button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+      }
+
+      @media (max-width: 1100px) {
+        .hero,
+        .value-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page {
+          padding: 22px 18px 92px;
+        }
+
+        .brand {
+          flex-direction: column;
+        }
+
+        .tree-row {
+          grid-template-columns: 48px 1fr;
+        }
+
+        .tag {
+          grid-column: 2;
+          justify-self: start;
+        }
+      }
+
+      @media print {
+        .presentation-back-button {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="brand">
+        <div class="logo">KRAMER</div>
+        <div class="badge">vCDM-Projektstruktur</div>
+      </header>
+
+      <section class="hero">
+        <div class="intro">
+          <p class="kicker"><mark>03</mark> Anwendung &amp; Lösung</p>
+          <h1>Fahrzeugprojekt in vCDM strukturieren</h1>
+          <p class="lead">Die Struktur zeigt, wie ein Fahrzeugprojekt vom Projektordner bis zur freigegebenen Variante nachvollziehbar aufgebaut werden kann.</p>
+        </div>
+
+        <article class="structure-card" aria-label="Beispielstruktur eines Fahrzeugprojekts in vCDM">
+          <div class="structure-header">
+            <p>Beispielprojekt<strong>Kramer 8155</strong></p>
+            <span class="status">durchgängige Datenbasis</span>
+          </div>
+          <div class="tree">
+            <div class="tree-row">
+              <i class="fa-solid fa-folder-tree"></i>
+              <p><span>Fahrzeugprojekt</span><strong>Kompaktlader 8155</strong></p>
+              <b class="tag">Projektkontext</b>
+            </div>
+            <div class="tree-row">
+              <i class="fa-solid fa-code-branch"></i>
+              <p><span>Softwarestand</span><strong>SW 2026.04</strong></p>
+              <b class="tag">versioniert</b>
+            </div>
+            <div class="tree-row">
+              <i class="fa-solid fa-database"></i>
+              <p><span>Parameterdatensatz</span><strong>Motor, Hydraulik, Antrieb</strong></p>
+              <b class="tag">zentral</b>
+            </div>
+            <div class="tree-row">
+              <i class="fa-solid fa-sliders"></i>
+              <p><span>Variante</span><strong>EU Stage V / US / Kundensetup</strong></p>
+              <b class="tag">vergleichbar</b>
+            </div>
+            <div class="tree-row">
+              <i class="fa-solid fa-shield-halved"></i>
+              <p><span>Freigabe</span><strong>Entwicklung &rarr; Qualität &rarr; Service</strong></p>
+              <b class="tag">nachvollziehbar</b>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="value-grid" aria-label="Nutzen der vCDM-Projektstruktur für Kramer">
+        <article class="value-card">
+          <i class="fa-solid fa-magnifying-glass-chart"></i>
+          <h2>Schneller finden</h2>
+          <p>Parameterstände sind projekt- und fahrzeugbezogen auffindbar, statt über Ablagen und Dateinamen gesucht werden zu müssen.</p>
+        </article>
+        <article class="value-card">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h2>Änderungen verstehen</h2>
+          <p>Versionen, Varianten und Freigaben machen sichtbar, welcher Stand zu welchem Software- und Fahrzeugkontext gehört.</p>
+        </article>
+        <article class="value-card">
+          <i class="fa-solid fa-file-export"></i>
+          <h2>Gezielt weitergeben</h2>
+          <p>Freigegebene Datensätze können kontrollierter für Entwicklung, Service oder den Parameter Converter genutzt werden.</p>
+        </article>
+      </section>
+    </main>
+
+    <button class="presentation-back-button" type="button" onclick="if (history.length > 1) { history.back(); } else { location.href='index.html#vcdm-project'; }" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
+  </body>
+</html>

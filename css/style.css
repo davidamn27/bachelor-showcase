@@ -1645,6 +1645,31 @@ main {
   font-size: 16px;
 }
 
+.process-panel-subline {
+  max-width: 780px;
+  color: var(--muted);
+  font-size: clamp(17px, 1.55vw, 23px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.vcdm-project-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(1, 5, 7, 0.7), rgba(1, 5, 7, 0.34) 48%, rgba(1, 5, 7, 0.72)),
+    url("../assets/images/vcdm/vcdm-center.jpeg") center / cover;
+  opacity: 0.5;
+}
+
+.vcdm-project-panel {
+  background:
+    linear-gradient(135deg, rgba(255, 196, 0, 0.18), rgba(10, 33, 29, 0.78) 48%, rgba(5, 9, 12, 0.9)),
+    rgba(7, 13, 16, 0.8);
+}
+
 .green-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
