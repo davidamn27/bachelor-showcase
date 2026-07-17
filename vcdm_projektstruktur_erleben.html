@@ -113,6 +113,67 @@
         line-height: 1.38;
       }
 
+      .screenshot-story {
+        display: grid;
+        gap: clamp(28px, 4vw, 56px);
+        margin-top: clamp(34px, 5vw, 72px);
+      }
+
+      .screenshot-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.35fr);
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 34px 92px rgba(0, 0, 0, 0.44), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(18px);
+      }
+
+      .screenshot-frame {
+        min-height: 0;
+        padding: clamp(14px, 1.8vw, 24px);
+        border-right: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.36);
+      }
+
+      .screenshot-frame img {
+        width: 100%;
+        display: block;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 6px;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      }
+
+      .screenshot-note {
+        display: grid;
+        align-content: center;
+        gap: 18px;
+        padding: clamp(26px, 3vw, 42px);
+      }
+
+      .screenshot-note span {
+        color: var(--yellow);
+        font-size: 14px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .screenshot-note h2 {
+        margin: 0;
+        font-size: clamp(28px, 2.8vw, 48px);
+        line-height: 1;
+      }
+
+      .screenshot-note p {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(18px, 1.45vw, 23px);
+        font-weight: 700;
+        line-height: 1.42;
+      }
+
       .structure-card {
         border: 1px solid var(--line);
         border-radius: 8px;
@@ -267,8 +328,14 @@
 
       @media (max-width: 1100px) {
         .hero,
-        .value-grid {
+        .value-grid,
+        .screenshot-card {
           grid-template-columns: 1fr;
+        }
+
+        .screenshot-frame {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
         }
       }
 
@@ -309,40 +376,52 @@
         <div class="intro">
           <p class="kicker"><mark>03</mark> Anwendung &amp; Lösung</p>
           <h1>Fahrzeugprojekt in vCDM strukturieren</h1>
-          <p class="lead">Die Struktur zeigt, wie ein Fahrzeugprojekt vom Projektordner bis zur freigegebenen Variante nachvollziehbar aufgebaut werden kann.</p>
+          <p class="lead">Die Screenshots zeigen beispielhaft, wie ein Fahrzeugprojekt in vCDM aufgebaut, navigiert und über Datensätze, Varianten und Freigaben nachvollziehbar gemacht werden kann.</p>
         </div>
+      </section>
 
-        <article class="structure-card" aria-label="Beispielstruktur eines Fahrzeugprojekts in vCDM">
-          <div class="structure-header">
-            <p>Beispielprojekt<strong>Kramer 8155</strong></p>
-            <span class="status">durchgängige Datenbasis</span>
+      <section class="screenshot-story" aria-label="Screenshots zur vCDM-Projektstruktur">
+        <article class="screenshot-card">
+          <div class="screenshot-frame">
+            <img src="assets/images/vcdm/vcdm-projektstruktur-01.jpeg" alt="Screenshot einer vCDM-Projektstruktur" />
           </div>
-          <div class="tree">
-            <div class="tree-row">
-              <i class="fa-solid fa-folder-tree"></i>
-              <p><span>Fahrzeugprojekt</span><strong>Kompaktlader 8155</strong></p>
-              <b class="tag">Projektkontext</b>
-            </div>
-            <div class="tree-row">
-              <i class="fa-solid fa-code-branch"></i>
-              <p><span>Softwarestand</span><strong>SW 2026.04</strong></p>
-              <b class="tag">versioniert</b>
-            </div>
-            <div class="tree-row">
-              <i class="fa-solid fa-database"></i>
-              <p><span>Parameterdatensatz</span><strong>Motor, Hydraulik, Antrieb</strong></p>
-              <b class="tag">zentral</b>
-            </div>
-            <div class="tree-row">
-              <i class="fa-solid fa-sliders"></i>
-              <p><span>Variante</span><strong>EU Stage V / US / Kundensetup</strong></p>
-              <b class="tag">vergleichbar</b>
-            </div>
-            <div class="tree-row">
-              <i class="fa-solid fa-shield-halved"></i>
-              <p><span>Freigabe</span><strong>Entwicklung &rarr; Qualität &rarr; Service</strong></p>
-              <b class="tag">nachvollziehbar</b>
-            </div>
+          <div class="screenshot-note">
+            <span>01 Projektkontext</span>
+            <h2>Fahrzeugprojekt als Einstieg</h2>
+            <p>Ein Projekt bündelt die relevanten Datenstände und schafft den Rahmen, in dem Software, Varianten und Parameter eindeutig zugeordnet werden.</p>
+          </div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame">
+            <img src="assets/images/vcdm/vcdm-projektstruktur-02.jpeg" alt="Screenshot einer vCDM-Ansicht mit Datensätzen" />
+          </div>
+          <div class="screenshot-note">
+            <span>02 Datensätze</span>
+            <h2>Parameterstände zentral sichtbar</h2>
+            <p>Die Ansicht macht deutlich, welche Datensätze zu einem Projekt gehören und welche Informationen für Entwicklung, Qualität oder Service relevant sind.</p>
+          </div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame">
+            <img src="assets/images/vcdm/vcdm-projektstruktur-03.jpeg" alt="Screenshot einer vCDM-Detailansicht" />
+          </div>
+          <div class="screenshot-note">
+            <span>03 Versionierung</span>
+            <h2>Änderungen nachvollziehen</h2>
+            <p>Versionen und Bearbeitungsstände können direkt am Datensatz eingeordnet werden. Dadurch wird transparent, welcher Stand wofür genutzt wurde.</p>
+          </div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame">
+            <img src="assets/images/vcdm/vcdm-projektstruktur-04.jpeg" alt="Screenshot einer vCDM-Übersicht mit Struktur und Kennzahlen" />
+          </div>
+          <div class="screenshot-note">
+            <span>04 Freigabe</span>
+            <h2>Vom Datensatz zur Nutzung</h2>
+            <p>Freigegebene Stände können gezielter weitergegeben, verglichen oder in nachgelagerte Prozesse wie den Parameter Converter übernommen werden.</p>
           </div>
         </article>
       </section>
