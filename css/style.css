@@ -2102,6 +2102,200 @@ main {
   opacity: 0.88;
 }
 
+.outlook-screen {
+  grid-template-rows: auto 1fr;
+  gap: clamp(24px, 3.8vh, 46px);
+  background:
+    linear-gradient(90deg, rgba(3, 6, 8, 0.9), rgba(3, 6, 8, 0.42) 48%, rgba(3, 6, 8, 0.8)),
+    url("../assets/images/roadmap-steinbruch.jpg") center / cover no-repeat;
+}
+
+.outlook-screen::before {
+  background:
+    radial-gradient(circle at 18% 28%, rgba(255, 196, 0, 0.18), transparent 20%),
+    radial-gradient(circle at 82% 70%, rgba(255, 196, 0, 0.14), transparent 18%),
+    linear-gradient(90deg, rgba(3, 5, 7, 0.86), rgba(3, 5, 7, 0.24) 56%, rgba(3, 5, 7, 0.72));
+}
+
+.outlook-title {
+  max-width: 1040px;
+  align-self: start;
+}
+
+.outlook-plan {
+  width: min(1500px, 92vw);
+  min-height: clamp(420px, 50vh, 560px);
+  position: relative;
+  justify-self: center;
+  align-self: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.26fr);
+  gap: clamp(30px, 4vw, 62px);
+  align-items: center;
+}
+
+.outlook-track {
+  position: absolute;
+  z-index: 0;
+  left: 3%;
+  right: 25%;
+  top: 22%;
+  height: 9px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--yellow), #ffe47a 82%, var(--yellow));
+  box-shadow: 0 0 30px rgba(255, 196, 0, 0.62);
+}
+
+.outlook-track::after {
+  content: "";
+  position: absolute;
+  right: -22px;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  border-top: 9px solid var(--yellow);
+  border-right: 9px solid var(--yellow);
+  transform: translateY(-50%) rotate(45deg);
+  filter: drop-shadow(0 0 14px rgba(255, 196, 0, 0.7));
+}
+
+.outlook-step {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: clamp(86px, 6.4vw, 118px) auto auto auto auto;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding-top: clamp(6px, 1vh, 16px);
+  background: transparent;
+  text-align: left;
+}
+
+.outlook-step:nth-of-type(1) {
+  grid-column: 1;
+  grid-row: 1;
+  width: 21%;
+}
+
+.outlook-step:nth-of-type(2) {
+  grid-column: 1;
+  grid-row: 1;
+  width: 21%;
+  margin-left: 25%;
+}
+
+.outlook-step:nth-of-type(3) {
+  grid-column: 1;
+  grid-row: 1;
+  width: 21%;
+  margin-left: 50%;
+}
+
+.outlook-step:nth-of-type(4) {
+  grid-column: 1;
+  grid-row: 1;
+  width: 21%;
+  margin-left: 75%;
+}
+
+.outlook-step-decision {
+  filter: drop-shadow(0 0 22px rgba(255, 196, 0, 0.26));
+}
+
+.outlook-node {
+  width: clamp(78px, 5.4vw, 104px);
+  height: clamp(78px, 5.4vw, 104px);
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  border: 8px solid var(--yellow);
+  border-radius: 50%;
+  color: white;
+  background: rgba(5, 10, 13, 0.92);
+  box-shadow: inset 0 0 28px rgba(255, 196, 0, 0.08), 0 0 24px rgba(0, 0, 0, 0.46), 0 0 18px rgba(255, 196, 0, 0.28);
+}
+
+.outlook-step-decision .outlook-node {
+  border-color: var(--yellow);
+  color: white;
+  background: rgba(5, 10, 13, 0.94);
+  box-shadow: 0 0 48px rgba(255, 196, 0, 0.56);
+}
+
+.outlook-node i {
+  font-size: clamp(28px, 2.3vw, 42px);
+}
+
+.outlook-step em {
+  margin-top: clamp(10px, 1.4vh, 18px);
+  color: var(--yellow);
+  font-size: clamp(30px, 2.4vw, 48px);
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.outlook-step strong {
+  color: white;
+  font-size: clamp(18px, 1.45vw, 27px);
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.outlook-step p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(14px, 1vw, 18px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.outlook-step small {
+  margin-top: clamp(10px, 1.4vh, 18px);
+  padding-top: clamp(10px, 1.4vh, 18px);
+  border-top: 2px dotted rgba(255, 255, 255, 0.34);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(13px, 0.9vw, 16px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.outlook-step-decision small {
+  color: var(--green);
+}
+
+.outlook-summary {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  min-height: clamp(260px, 35vh, 360px);
+  display: grid;
+  align-content: center;
+  gap: 26px;
+  padding: clamp(28px, 3vw, 44px);
+  border: 1px solid rgba(255, 196, 0, 0.62);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255, 196, 0, 0.1), transparent 38%),
+    rgba(6, 11, 13, 0.72);
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.42), 0 0 50px rgba(255, 196, 0, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.outlook-summary i {
+  color: var(--yellow);
+  font-size: clamp(46px, 4.2vw, 74px);
+}
+
+.outlook-summary p {
+  margin: 0;
+  color: white;
+  font-size: clamp(22px, 1.9vw, 34px);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
 .sharepoint-screen {
   grid-template-rows: auto 1fr;
   gap: clamp(36px, 5vh, 64px);
@@ -2188,6 +2382,38 @@ main {
 
   .vcdm-info-visual {
     aspect-ratio: 16 / 9;
+  }
+
+  .outlook-plan {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .outlook-track {
+    display: none;
+  }
+
+  .outlook-step {
+    min-height: auto;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    justify-items: start;
+    text-align: left;
+    width: auto;
+    margin-left: 0;
+  }
+
+  .outlook-step p {
+    max-width: none;
+  }
+
+  .outlook-node {
+    grid-row: span 2;
+  }
+
+  .outlook-summary {
+    grid-column: 1;
+    min-height: auto;
   }
 }
 
