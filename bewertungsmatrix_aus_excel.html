@@ -80,6 +80,12 @@ td{color:rgba(245,247,250,.86);font-size:14px;line-height:1.45}
 </style>
 
 <style id="presentation-back-style">
+.matrix-mode-switch{display:flex;gap:10px;align-items:center;margin:0 0 22px;flex-wrap:wrap}
+.matrix-mode-switch button{border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.055);color:var(--text);padding:10px 15px;font:900 13px/1 "Segoe UI",Arial,sans-serif;letter-spacing:.04em;cursor:pointer}
+.matrix-mode-switch button.active{background:var(--yellow);border-color:var(--yellow);color:#111;box-shadow:0 0 22px rgba(245,196,0,.22)}
+.matrix-mode-note{color:var(--muted);font-size:14px;line-height:1.45;margin:-8px 0 18px}
+.bar-row b small{font-size:12px;color:var(--muted);font-weight:800;margin-left:4px}
+.matrix-sort-hint{color:var(--muted);font-size:13px;margin:8px 0 0}
 .presentation-back-button{position:fixed;z-index:99999;left:24px;bottom:24px;display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border:1px solid rgba(255,196,0,.72);border-radius:999px;background:#f5c400;color:#090909;font:900 15px/1.1 "Segoe UI",Arial,sans-serif;text-decoration:none;box-shadow:0 18px 46px rgba(0,0,0,.42),0 0 28px rgba(245,196,0,.24);cursor:pointer}
 .presentation-back-button:hover{transform:translateY(-1px);filter:brightness(1.04)}
 .presentation-back-button span{font-size:18px;line-height:1}
@@ -106,42 +112,15 @@ td{color:rgba(245,247,250,.86);font-size:14px;line-height:1.45}
       </div>
     </div>
     <div class="panel ranking-panel">
-      <div class="kicker">Ranking nach Gesamterfüllung</div>
-      <div class="bar-row">
-      <span>Eigenentwicklung</span>
-      <div class="bar-track"><div class="bar-fill" style="width:81.0%"></div></div>
-      <b>81.0%</b>
-    </div>
-<div class="bar-row">
-      <span>CONTACT Software</span>
-      <div class="bar-track"><div class="bar-fill" style="width:79.8%"></div></div>
-      <b>79.8%</b>
-    </div>
-<div class="bar-row">
-      <span>dSPACE SYNECT</span>
-      <div class="bar-track"><div class="bar-fill" style="width:76.0%"></div></div>
-      <b>76.0%</b>
-    </div>
-<div class="bar-row">
-      <span>Vector vCDM</span>
-      <div class="bar-track"><div class="bar-fill" style="width:74.5%"></div></div>
-      <b>74.5%</b>
-    </div>
-<div class="bar-row">
-      <span>AVL CRETA</span>
-      <div class="bar-track"><div class="bar-fill" style="width:69.6%"></div></div>
-      <b>69.6%</b>
-    </div>
-<div class="bar-row">
-      <span>Mendix Low Code</span>
-      <div class="bar-track"><div class="bar-fill" style="width:65.2%"></div></div>
-      <b>65.2%</b>
-    </div>
-<div class="bar-row">
-      <span>ETAS INCA eCDM</span>
-      <div class="bar-track"><div class="bar-fill" style="width:52.6%"></div></div>
-      <b>52.6%</b>
-    </div>
+      <div class="kicker" id="rankingTitle">Ranking nach Gesamterfüllung</div>
+      <div class="matrix-mode-switch" aria-label="Bewertungsansicht auswählen">
+        <button type="button" class="active" data-mode="total">Gesamt</button>
+        <button type="button" data-mode="tech">Technisch</button>
+        <button type="button" data-mode="impl">Implementierung</button>
+      </div>
+      <p class="matrix-mode-note" id="rankingNote">Sortierung nach Gesamterfüllung aus technischer und implementierungsbezogener Bewertung.</p>
+      <div id="rankingBars"></div>
+      <p class="matrix-sort-hint">Die Tabelle unten passt sich an die gewählte Bewertungsperspektive an.</p>
     </div>
   </section>
 
@@ -158,7 +137,7 @@ td{color:rgba(245,247,250,.86);font-size:14px;line-height:1.45}
       <thead>
         <tr><th>Rang</th><th>Tool</th><th>Gesamt</th><th>Technik-Beitrag</th><th>Implementierung-Beitrag</th><th>Klasse</th></tr>
       </thead>
-      <tbody><tr>
+      <tbody id="rankingTable"><tr>
       <td><strong>1</strong></td>
       <td>Eigenentwicklung</td>
       <td>81.0%</td>
@@ -218,6 +197,57 @@ td{color:rgba(245,247,250,.86);font-size:14px;line-height:1.45}
   </div>
   <div class="footer">Quelle: Bewertungsmatrix_Parametermanagement_Tool(2).xlsx · automatisch aus der hochgeladenen Excel-Datei erzeugt.</div>
 </div>
+
+<script id="matrix-mode-script">
+(function(){
+  const tools = [
+    { tool: 'Eigenentwicklung', total: 81.0, tech: 60.0, impl: 21.0, klasse: 'AB', cls: 'muss' },
+    { tool: 'CONTACT Software', total: 79.8, tech: 50.8, impl: 29.0, klasse: 'B', cls: 'soll' },
+    { tool: 'dSPACE SYNECT', total: 76.0, tech: 50.0, impl: 26.0, klasse: 'B', cls: 'soll' },
+    { tool: 'Vector vCDM', total: 74.5, tech: 51.5, impl: 23.0, klasse: 'B', cls: 'soll' },
+    { tool: 'AVL CRETA', total: 69.6, tech: 46.6, impl: 23.0, klasse: 'B', cls: 'soll' },
+    { tool: 'Mendix Low Code', total: 65.2, tech: 46.2, impl: 19.0, klasse: 'B', cls: 'soll' },
+    { tool: 'ETAS INCA eCDM', total: 52.6, tech: 34.6, impl: 18.0, klasse: 'C', cls: 'kann' }
+  ];
+  const modes = {
+    total: { title: 'Ranking nach Gesamterfüllung', note: 'Sortierung nach Gesamterfüllung aus technischer und implementierungsbezogener Bewertung.', label: v => v.toFixed(1) + '%', max: 100 },
+    tech: { title: 'Ranking nach technischer Bewertung', note: 'Fokus auf technische Kriterien wie Versionierung, Formatumwandlung, Suche, Filter und Freigabeworkflow.', label: v => v.toFixed(1) + ' / 60', max: 60 },
+    impl: { title: 'Ranking nach Implementierung', note: 'Fokus auf Einführung, Support, Anpassbarkeit, IT-Eignung, Kosten und Einführungsrisiko.', label: v => v.toFixed(1) + ' / 40', max: 40 }
+  };
+  const bars = document.getElementById('rankingBars');
+  const table = document.getElementById('rankingTable');
+  const title = document.getElementById('rankingTitle');
+  const note = document.getElementById('rankingNote');
+  const buttons = Array.from(document.querySelectorAll('.matrix-mode-switch button'));
+  if (!bars || !table) return;
+  function render(mode){
+    const config = modes[mode];
+    const sorted = [...tools].sort((a,b) => b[mode] - a[mode]);
+    title.textContent = config.title;
+    note.textContent = config.note;
+    bars.innerHTML = sorted.map(item => `
+      <div class="bar-row">
+        <span>${item.tool}</span>
+        <div class="bar-track"><div class="bar-fill" style="width:${Math.max(0, Math.min(100, item[mode] / config.max * 100)).toFixed(1)}%"></div></div>
+        <b>${config.label(item[mode])}</b>
+      </div>
+    `).join('');
+    table.innerHTML = sorted.map((item, index) => `
+      <tr>
+        <td><strong>${index + 1}</strong></td>
+        <td>${item.tool}</td>
+        <td>${item.total.toFixed(1)}%</td>
+        <td>${item.tech.toFixed(1)}</td>
+        <td>${item.impl.toFixed(1)}</td>
+        <td><span class="prio ${item.cls}">${item.klasse}</span></td>
+      </tr>
+    `).join('');
+    buttons.forEach(button => button.classList.toggle('active', button.dataset.mode === mode));
+  }
+  buttons.forEach(button => button.addEventListener('click', () => render(button.dataset.mode)));
+  render('total');
+})();
+</script>
 
 <button class="presentation-back-button" type="button" onclick="if (history.length > 1) { history.back(); } else { location.href='index.html'; }" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
 </body>
