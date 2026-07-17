@@ -2104,7 +2104,7 @@ main {
 
 .vcdm-possibilities-screen {
   grid-template-rows: auto 1fr auto;
-  gap: clamp(22px, 3vh, 36px);
+  gap: clamp(16px, 2.3vh, 28px);
   background:
     linear-gradient(90deg, rgba(3, 6, 8, 0.9), rgba(3, 6, 8, 0.48) 52%, rgba(3, 6, 8, 0.82)),
     url("../assets/images/vcdm/vcdm-center.jpeg") center / cover no-repeat;
@@ -2127,11 +2127,11 @@ main {
   align-self: center;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(18px, 2vw, 28px);
+  gap: clamp(16px, 1.8vw, 24px);
 }
 
 .vcdm-possibility-card {
-  min-height: clamp(170px, 19vh, 220px);
+  min-height: clamp(158px, 17vh, 205px);
   display: grid;
   align-content: start;
   gap: 14px;
