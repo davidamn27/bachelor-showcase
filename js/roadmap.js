@@ -6,6 +6,8 @@ const sections = [
   { id: "process", label: "Anwendung & Lösung", focus: { x: "62%", y: "48%", scale: 1.42, brightness: 0.76 } },
   { id: "converter", label: "Parameter Converter", focus: { x: "70%", y: "44%", scale: 1.5, brightness: 0.74 } },
   { id: "vcdm", label: "vCDM", focus: { x: "78%", y: "35%", scale: 1.58, brightness: 0.72 } },
+  { id: "vcdm-possibilities", label: "vCDM Möglichkeiten", focus: { x: "72%", y: "42%", scale: 1.5, brightness: 0.72 } },
+  { id: "outlook", label: "Ausblick", focus: { x: "58%", y: "48%", scale: 1.34, brightness: 0.7 } },
   { id: "sharepoint", label: "SharePoint", focus: { x: "74%", y: "54%", scale: 1.44, brightness: 0.76 } }
 ];
 
