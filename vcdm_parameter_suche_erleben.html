@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Use Case: Projekt nach Parameter durchsuchen</title>
+    <link rel="stylesheet" href="css/vendor/fontawesome.min.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --yellow: #ffc400;
+        --bg: #020506;
+        --panel: rgba(8, 13, 16, 0.84);
+        --line: rgba(255, 255, 255, 0.16);
+        --text: #f7f7f2;
+        --muted: rgba(247, 247, 242, 0.68);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background:
+          linear-gradient(90deg, rgba(2, 5, 6, 0.94), rgba(2, 5, 6, 0.7) 48%, rgba(2, 5, 6, 0.92)),
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          url("assets/images/vcdm/vcdm-center.jpeg") center / cover fixed,
+          var(--bg);
+        background-size: auto, 96px 96px, 96px 96px, cover, auto;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: clamp(28px, 5vw, 64px);
+      }
+
+      .brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: clamp(34px, 5vw, 70px);
+      }
+
+      .logo {
+        color: rgba(247, 247, 242, 0.28);
+        font-size: clamp(30px, 3vw, 48px);
+        font-weight: 950;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: var(--yellow);
+        color: #111;
+        font-weight: 950;
+      }
+
+      .intro {
+        max-width: 1200px;
+      }
+
+      .kicker {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 16px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .kicker mark {
+        background: none;
+        color: var(--yellow);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(48px, 5.6vw, 106px);
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        max-width: 900px;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: clamp(20px, 1.8vw, 29px);
+        font-weight: 700;
+        line-height: 1.38;
+      }
+
+      .screenshot-story {
+        display: grid;
+        gap: clamp(28px, 4vw, 54px);
+        margin-top: clamp(34px, 5vw, 72px);
+      }
+
+      .screenshot-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.28fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 34px 92px rgba(0, 0, 0, 0.44), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(18px);
+      }
+
+      .screenshot-frame {
+        padding: clamp(14px, 1.8vw, 24px);
+        border-right: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.36);
+      }
+
+      .screenshot-frame img {
+        width: 100%;
+        display: block;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 6px;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      }
+
+      .screenshot-note {
+        display: grid;
+        align-content: center;
+        gap: 14px;
+        padding: clamp(22px, 2.35vw, 34px);
+      }
+
+      .screenshot-note span {
+        color: var(--yellow);
+        font-size: 13px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .screenshot-note h2 {
+        margin: 0;
+        font-size: clamp(26px, 2.15vw, 38px);
+        line-height: 1;
+      }
+
+      .screenshot-note ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .screenshot-note li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: clamp(16px, 1.15vw, 20px);
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .screenshot-note li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.58em;
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--yellow);
+      }
+
+      .presentation-back-button {
+        position: fixed;
+        z-index: 99999;
+        left: 24px;
+        bottom: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 18px;
+        border: 1px solid rgba(255, 196, 0, 0.72);
+        border-radius: 999px;
+        background: var(--yellow);
+        color: #090909;
+        font: 900 15px/1.1 "Segoe UI", Arial, sans-serif;
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.42), 0 0 28px rgba(255, 196, 0, 0.24);
+        cursor: pointer;
+      }
+
+      .presentation-back-button:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.04);
+      }
+
+      @media (max-width: 1100px) {
+        .screenshot-card {
+          grid-template-columns: 1fr;
+        }
+
+        .screenshot-frame {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page {
+          padding: 22px 18px 92px;
+        }
+
+        .brand {
+          flex-direction: column;
+        }
+      }
+
+      @media print {
+        .presentation-back-button {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="brand">
+        <div class="logo">KRAMER</div>
+        <div class="badge">Use Case Parametersuche</div>
+      </header>
+
+      <section class="intro">
+        <p class="kicker"><mark>03</mark> Anwendung &amp; Lösung</p>
+        <h1>Projekt nach einem Parameter durchsuchen</h1>
+        <p class="lead">Der Use Case zeigt, wie in vCDM ein Projekt geöffnet, der Analysebereich genutzt und ein bestimmter Parameter über mehrere Datensätze hinweg gefunden und verglichen werden kann.</p>
+      </section>
+
+      <section class="screenshot-story" aria-label="Screenshots zum Use Case Parametersuche in vCDM">
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-01.jpeg" alt="vCDM Projekt mit geöffnetem Datenbaum" /></div>
+          <div class="screenshot-note"><span>01 Projekt öffnen</span><h2>Projektkontext herstellen</h2><ul><li>Fahrzeug- oder Projektstruktur öffnen</li><li>Relevanten Datenstand auswählen</li><li>Ausgangspunkt für die Suche festlegen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-02.jpeg" alt="vCDM Analyse und Reporting Bereich" /></div>
+          <div class="screenshot-note"><span>02 Analyse starten</span><h2>Analysebereich nutzen</h2><ul><li>In Analyse und Reporting wechseln</li><li>Value Population Matrix öffnen</li><li>Parametervergleich vorbereiten</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-03.jpeg" alt="Dialog zur Auswahl von Datensätzen" /></div>
+          <div class="screenshot-note"><span>03 Datensätze wählen</span><h2>Suchraum eingrenzen</h2><ul><li>Relevante Datensätze markieren</li><li>Softwarestände einbeziehen</li><li>Vergleichsbasis definieren</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-04.jpeg" alt="Parameter Scope Dialog" /></div>
+          <div class="screenshot-note"><span>04 Parameter Scope</span><h2>Parameterfilter aufbauen</h2><ul><li>Parameterbereich öffnen</li><li>Gezielte Auswahl vorbereiten</li><li>Unnötige Treffer reduzieren</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-05.jpeg" alt="Parameterauswahl im Dialog" /></div>
+          <div class="screenshot-note"><span>05 Parameter auswählen</span><h2>Gesuchten Parameter finden</h2><ul><li>Parameterliste durchsuchen</li><li>Passende Einträge auswählen</li><li>Auswahl bestätigen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-06.jpeg" alt="Gefilterte Parameterliste" /></div>
+          <div class="screenshot-note"><span>06 Treffer übernehmen</span><h2>Auswahl prüfen</h2><ul><li>Gefundene Parameter kontrollieren</li><li>Filterliste übernehmen</li><li>Analyse fortsetzen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-07.jpeg" alt="Parametereinstellungen für die Auswertung" /></div>
+          <div class="screenshot-note"><span>07 Einstellungen</span><h2>Vergleich konfigurieren</h2><ul><li>Quantisierung bewusst wählen</li><li>Vergleichslogik festlegen</li><li>Auswertung abschließen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-08.jpeg" alt="Zusätzliche Felder für die Auswertung" /></div>
+          <div class="screenshot-note"><span>08 Zusatzdaten</span><h2>Informationen ergänzen</h2><ul><li>Weitere Attribute einblenden</li><li>Management- oder A2L-Informationen nutzen</li><li>Kontext für Bewertung erweitern</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-09.jpeg" alt="Ergebnis der Value Population Matrix" /></div>
+          <div class="screenshot-note"><span>09 Ergebnis</span><h2>Parameterwerte sehen</h2><ul><li>Treffer in Matrix anzeigen</li><li>Werte über Datensätze vergleichen</li><li>Abweichungen schnell erkennen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-parameter-suche-10.jpeg" alt="Ausgefüllte Vergleichsmatrix mit mehreren Parametern" /></div>
+          <div class="screenshot-note"><span>10 Bewertung</span><h2>Projektweit vergleichen</h2><ul><li>Mehrere Parameter zusammen auswerten</li><li>Variantenunterschiede sichtbar machen</li><li>Entscheidung oder Anpassung vorbereiten</li></ul></div>
+        </article>
+      </section>
+    </main>
+
+    <button class="presentation-back-button" type="button" onclick="if (history.length > 1) { history.back(); } else { location.href='index.html#vcdm-parameter-search-entry'; }" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
+  </body>
+</html>
