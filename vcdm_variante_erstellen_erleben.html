@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Use Case: Neue Variante durch Parameteränderung erstellen</title>
+    <link rel="stylesheet" href="css/vendor/fontawesome.min.css" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --yellow: #ffc400;
+        --bg: #020506;
+        --panel: rgba(8, 13, 16, 0.84);
+        --line: rgba(255, 255, 255, 0.16);
+        --text: #f7f7f2;
+        --muted: rgba(247, 247, 242, 0.68);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background:
+          linear-gradient(90deg, rgba(2, 5, 6, 0.94), rgba(2, 5, 6, 0.7) 48%, rgba(2, 5, 6, 0.92)),
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          url("assets/images/vcdm/vcdm-center.jpeg") center / cover fixed,
+          var(--bg);
+        background-size: auto, 96px 96px, 96px 96px, cover, auto;
+      }
+
+      .page { min-height: 100vh; padding: clamp(28px, 5vw, 64px); }
+
+      .brand {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 24px;
+        margin-bottom: clamp(34px, 5vw, 70px);
+      }
+
+      .logo {
+        color: rgba(247, 247, 242, 0.28);
+        font-size: clamp(30px, 3vw, 48px);
+        font-weight: 950;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        background: var(--yellow);
+        color: #111;
+        font-weight: 950;
+      }
+
+      .intro { max-width: 1200px; }
+
+      .kicker {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 16px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .kicker mark { background: none; color: var(--yellow); }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(46px, 5.4vw, 102px);
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        max-width: 920px;
+        margin: 28px 0 0;
+        color: var(--muted);
+        font-size: clamp(20px, 1.8vw, 29px);
+        font-weight: 700;
+        line-height: 1.38;
+      }
+
+      .screenshot-story {
+        display: grid;
+        gap: clamp(28px, 4vw, 54px);
+        margin-top: clamp(34px, 5vw, 72px);
+      }
+
+      .screenshot-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.28fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 34px 92px rgba(0, 0, 0, 0.44), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(18px);
+      }
+
+      .screenshot-frame {
+        padding: clamp(14px, 1.8vw, 24px);
+        border-right: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.36);
+      }
+
+      .screenshot-frame img {
+        width: 100%;
+        display: block;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 6px;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+      }
+
+      .screenshot-note {
+        display: grid;
+        align-content: center;
+        gap: 14px;
+        padding: clamp(22px, 2.35vw, 34px);
+      }
+
+      .screenshot-note span {
+        color: var(--yellow);
+        font-size: 13px;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .screenshot-note h2 {
+        margin: 0;
+        font-size: clamp(26px, 2.15vw, 38px);
+        line-height: 1;
+      }
+
+      .screenshot-note ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .screenshot-note li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: clamp(16px, 1.15vw, 20px);
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .screenshot-note li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.58em;
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--yellow);
+      }
+
+      .presentation-back-button {
+        position: fixed;
+        z-index: 99999;
+        left: 24px;
+        bottom: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 18px;
+        border: 1px solid rgba(255, 196, 0, 0.72);
+        border-radius: 999px;
+        background: var(--yellow);
+        color: #090909;
+        font: 900 15px/1.1 "Segoe UI", Arial, sans-serif;
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.42), 0 0 28px rgba(255, 196, 0, 0.24);
+        cursor: pointer;
+      }
+
+      .presentation-back-button:hover { transform: translateY(-1px); filter: brightness(1.04); }
+
+      @media (max-width: 1100px) {
+        .screenshot-card { grid-template-columns: 1fr; }
+        .screenshot-frame { border-right: 0; border-bottom: 1px solid var(--line); }
+      }
+
+      @media (max-width: 720px) {
+        .page { padding: 22px 18px 92px; }
+        .brand { flex-direction: column; }
+      }
+
+      @media print { .presentation-back-button { display: none; } }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="brand">
+        <div class="logo">KRAMER</div>
+        <div class="badge">Use Case Variantenerstellung</div>
+      </header>
+
+      <section class="intro">
+        <p class="kicker"><mark>03</mark> Anwendung &amp; Lösung</p>
+        <h1>Neue Variante durch Parameteränderung erstellen</h1>
+        <p class="lead">Der Use Case zeigt, wie aus einem bestehenden Datenstand eine neue Variante entsteht: Parameter auswählen, Wert ändern, Änderung nachvollziehen und die neue Variante im Projektkontext sichern.</p>
+      </section>
+
+      <section class="screenshot-story" aria-label="Screenshots zum Use Case neue Variante in vCDM erstellen">
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-01.jpeg" alt="vCDM Projektstruktur mit ausgewähltem Datenstand" /></div>
+          <div class="screenshot-note"><span>01 Ausgangspunkt</span><h2>Datenstand auswählen</h2><ul><li>Projektstruktur öffnen</li><li>Bestehenden Datensatz markieren</li><li>Basis für neue Variante festlegen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-02.jpeg" alt="vCDM Ansicht zur Bearbeitung eines Parameterdatensatzes" /></div>
+          <div class="screenshot-note"><span>02 Bearbeitung</span><h2>Datensatz öffnen</h2><ul><li>Relevante Parameteransicht starten</li><li>Bearbeitbaren Stand herstellen</li><li>Änderung gezielt vorbereiten</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-03.jpeg" alt="Parameterliste in vCDM" /></div>
+          <div class="screenshot-note"><span>03 Parameter finden</span><h2>Parameter auswählen</h2><ul><li>Gewünschten Parameter suchen</li><li>Passenden Eintrag markieren</li><li>Änderungsstelle eindeutig festlegen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-04.jpeg" alt="Parameterwert in vCDM ändern" /></div>
+          <div class="screenshot-note"><span>04 Wert ändern</span><h2>Neue Ausprägung setzen</h2><ul><li>Parameterwert anpassen</li><li>Änderung im Datensatz sichtbar machen</li><li>Variante fachlich ableiten</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-05.jpeg" alt="Dialog zur Bestätigung einer Parameteränderung" /></div>
+          <div class="screenshot-note"><span>05 Übernehmen</span><h2>Änderung bestätigen</h2><ul><li>Anpassung prüfen</li><li>Änderung übernehmen</li><li>Bearbeitungsstand erzeugen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-06.jpeg" alt="vCDM Ansicht mit geänderter Variante" /></div>
+          <div class="screenshot-note"><span>06 Variante</span><h2>Neuen Stand einordnen</h2><ul><li>Geänderten Datensatz sichtbar machen</li><li>Neue Variante im Projektkontext prüfen</li><li>Unterschied zum Ausgangsstand erkennen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-07.jpeg" alt="vCDM Eigenschaften oder Historie der Änderung" /></div>
+          <div class="screenshot-note"><span>07 Nachvollziehbarkeit</span><h2>Änderung dokumentieren</h2><ul><li>Metadaten und Zustand prüfen</li><li>Änderung historisierbar machen</li><li>Verantwortlichkeit nachvollziehen</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-08.jpeg" alt="vCDM Vergleich der neuen Variante" /></div>
+          <div class="screenshot-note"><span>08 Vergleich</span><h2>Variante prüfen</h2><ul><li>Neue und alte Werte gegenüberstellen</li><li>Abweichung fachlich bewerten</li><li>Freigabefähigkeit vorbereiten</li></ul></div>
+        </article>
+
+        <article class="screenshot-card">
+          <div class="screenshot-frame"><img src="assets/images/vcdm/vcdm-variante-erstellen-09.jpeg" alt="vCDM Ergebnis mit neuer Variante" /></div>
+          <div class="screenshot-note"><span>09 Ergebnis</span><h2>Neue Variante verfügbar</h2><ul><li>Parameteränderung ist im Projekt abgelegt</li><li>Variante bleibt nachvollziehbar</li><li>Weitergabe oder Freigabe kann folgen</li></ul></div>
+        </article>
+      </section>
+    </main>
+
+    <button class="presentation-back-button" type="button" onclick="if (history.length > 1) { history.back(); } else { location.href='index.html#vcdm-variant-entry'; }" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
+  </body>
+</html>
