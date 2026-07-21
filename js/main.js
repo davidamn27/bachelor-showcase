@@ -337,15 +337,93 @@ function bindInterface() {
     });
   }
 
-  window.addEventListener("keydown", (event) => {
-    if (!["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"].includes(event.key)) return;
-    event.preventDefault();
+  window.addEventListener("keydown", handlePresentationKeys);
+}
 
-    const currentIndex = sections.findIndex((section) => section.id === state.activeSection);
-    const direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1 : -1;
-    const nextIndex = Math.min(Math.max(currentIndex + direction, 0), sections.length - 1);
-    document.getElementById(sections[nextIndex].id).scrollIntoView({ behavior: "smooth", block: "start" });
-  });
+function handlePresentationKeys(event) {
+  const keyMap = {
+    ArrowDown: 1,
+    ArrowRight: 1,
+    PageDown: 1,
+    ArrowUp: -1,
+    ArrowLeft: -1,
+    PageUp: -1
+  };
+
+  if (!(event.key in keyMap)) return;
+  if (isTypingTarget(event.target)) return;
+
+  event.preventDefault();
+  navigatePresentation(keyMap[event.key]);
+}
+
+function isTypingTarget(target) {
+  if (!target) return false;
+  const tagName = target.tagName?.toLowerCase();
+  return target.isContentEditable || ["input", "textarea", "select"].includes(tagName);
+}
+
+function navigatePresentation(direction) {
+  if (state.activeSection === "method") {
+    const methodSlides = getMethodPresentationSlides();
+    const currentMethodIndex = Math.max(
+      methodSlides.findIndex((slide) => slide.id === currentMethodSubSlide),
+      0
+    );
+    const nextMethodIndex = currentMethodIndex + direction;
+
+    if (nextMethodIndex >= 0 && nextMethodIndex < methodSlides.length) {
+      goToMethodPresentationSlide(methodSlides[nextMethodIndex].id);
+      return;
+    }
+  }
+
+  const currentIndex = Math.max(
+    sections.findIndex((section) => section.id === state.activeSection),
+    0
+  );
+  const nextIndex = Math.min(Math.max(currentIndex + direction, 0), sections.length - 1);
+  goToSection(sections[nextIndex].id);
+}
+
+function getMethodPresentationSlides() {
+  const fixedSlides = [
+    "method-overview",
+    "methodAnalyseSlide1",
+    "methodAnalyseSlide2",
+    "methodAnforderungenSlide1",
+    "methodAnforderungenSlide2",
+    "methodMarktSlide1",
+    "methodMarktSlide2",
+    "methodNutzwertSlide1",
+    "methodNutzwertSlide2",
+    "methodEntscheidungSlide1",
+    "methodEntscheidungSlide2"
+  ];
+
+  return fixedSlides
+    .filter((id) => id === "method-overview" || document.getElementById(id))
+    .map((id) => ({ id }));
+}
+
+function goToMethodPresentationSlide(slideId) {
+  const stepIndex = typeof methodSteps === "undefined"
+    ? -1
+    : methodSteps.findIndex((step) => step.subSlide === slideId || step.resultSlide === slideId);
+
+  if (stepIndex >= 0) {
+    setMethodStep(stepIndex);
+  }
+
+  goToSection("method", "auto");
+  showMethodSubSlide(slideId);
+}
+
+function goToSection(sectionId, behavior = "smooth") {
+  const element = document.getElementById(sectionId);
+  if (!element) return;
+  element.scrollIntoView({ behavior, block: "start" });
+  applyFocus(sectionId);
 }
 
 function updateRoadmapNextLabel() {
