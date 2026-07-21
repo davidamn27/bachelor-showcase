@@ -283,6 +283,16 @@ buttons.forEach(btn => btn.addEventListener('click', () => {
 search.addEventListener('input', update);
 </script>
 
-<button class="presentation-back-button" type="button" onclick="location.href='index.html?slide=methodAnforderungenSlide1';" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
+<button class="presentation-back-button" type="button" onclick="returnToPresentation('index.html?slide=methodAnforderungenSlide1');" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
+<script>
+function returnToPresentation(fallbackUrl) {
+  if (window.opener && !window.opener.closed) {
+    window.opener.focus();
+    window.close();
+    return;
+  }
+  location.href = fallbackUrl;
+}
+</script>
 </body>
 </html>

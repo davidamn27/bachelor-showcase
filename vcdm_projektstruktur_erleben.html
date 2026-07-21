@@ -481,6 +481,16 @@
       </section>
     </main>
 
-    <button class="presentation-back-button" type="button" onclick="location.href='index.html#vcdm-project-entry';" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
-  </body>
+    <button class="presentation-back-button" type="button" onclick="returnToPresentation('index.html#vcdm-project-entry');" aria-label="Zurück zur Präsentation"><span>←</span> Zurück zur Präsentation</button>
+  <script>
+function returnToPresentation(fallbackUrl) {
+  if (window.opener && !window.opener.closed) {
+    window.opener.focus();
+    window.close();
+    return;
+  }
+  location.href = fallbackUrl;
+}
+</script>
+</body>
 </html>
