@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollExperience();
   setTool(0);
   applyFocus("hero");
+  restoreMethodSlideFromHash();
 });
 
 function renderSectionDots() {
@@ -221,6 +222,27 @@ function showMethodSubSlide(name) {
   } else {
     activate();
   }
+}
+
+function restoreMethodSlideFromHash() {
+  if (!window.location.hash.startsWith("#method?")) return;
+
+  const params = new URLSearchParams(window.location.hash.split("?")[1] || "");
+  const slide = params.get("slide");
+  if (!slide || !document.getElementById(slide)) return;
+
+  const stepIndex = typeof methodSteps === "undefined"
+    ? -1
+    : methodSteps.findIndex((step) => step.subSlide === slide || step.resultSlide === slide);
+
+  if (stepIndex >= 0) {
+    setMethodStep(stepIndex);
+  }
+
+  requestAnimationFrame(() => {
+    document.getElementById("method")?.scrollIntoView({ behavior: "auto", block: "start" });
+    showMethodSubSlide(slide);
+  });
 }
 
 function renderMethodDetail(index) {
