@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
   restoreMethodSlideFromUrl();
 });
 
+window.addEventListener("load", () => {
+  restoreMethodSlideFromUrl();
+});
+
 function renderSectionDots() {
   const dots = document.getElementById("sectionDots");
   dots.innerHTML = sections.map((section) => `
@@ -234,6 +238,8 @@ function restoreMethodSlideFromUrl() {
   const targetSlide = slide || fallbackSlide;
   if (!targetSlide || !document.getElementById(targetSlide)) return;
 
+  window.sessionStorage.setItem("methodReturnSlide", targetSlide);
+
   const stepIndex = typeof methodSteps === "undefined"
     ? -1
     : methodSteps.findIndex((step) => step.subSlide === targetSlide || step.resultSlide === targetSlide);
@@ -249,6 +255,8 @@ function restoreMethodSlideFromUrl() {
 
   requestAnimationFrame(restore);
   window.setTimeout(restore, 180);
+  window.setTimeout(restore, 600);
+  window.setTimeout(restore, 1200);
 }
 
 function renderMethodDetail(index) {
