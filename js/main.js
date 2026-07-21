@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollExperience();
   setTool(0);
   applyFocus("hero");
-  restoreMethodSlideFromHash();
+  restoreMethodSlideFromUrl();
 });
 
 function renderSectionDots() {
@@ -224,25 +224,31 @@ function showMethodSubSlide(name) {
   }
 }
 
-function restoreMethodSlideFromHash() {
-  if (!window.location.hash.startsWith("#method?")) return;
-
-  const params = new URLSearchParams(window.location.hash.split("?")[1] || "");
+function restoreMethodSlideFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const hashParams = window.location.hash.startsWith("#method?")
+    ? new URLSearchParams(window.location.hash.split("?")[1] || "")
+    : null;
   const slide = params.get("slide");
-  if (!slide || !document.getElementById(slide)) return;
+  const fallbackSlide = hashParams?.get("slide");
+  const targetSlide = slide || fallbackSlide;
+  if (!targetSlide || !document.getElementById(targetSlide)) return;
 
   const stepIndex = typeof methodSteps === "undefined"
     ? -1
-    : methodSteps.findIndex((step) => step.subSlide === slide || step.resultSlide === slide);
+    : methodSteps.findIndex((step) => step.subSlide === targetSlide || step.resultSlide === targetSlide);
 
   if (stepIndex >= 0) {
     setMethodStep(stepIndex);
   }
 
-  requestAnimationFrame(() => {
+  const restore = () => {
     document.getElementById("method")?.scrollIntoView({ behavior: "auto", block: "start" });
-    showMethodSubSlide(slide);
-  });
+    showMethodSubSlide(targetSlide);
+  };
+
+  requestAnimationFrame(restore);
+  window.setTimeout(restore, 180);
 }
 
 function renderMethodDetail(index) {
