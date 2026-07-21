@@ -9,16 +9,22 @@ const state = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  const restoredMethodSlide = getMethodSlideFromUrl();
   renderSectionDots();
   renderRoadmapPoints();
   renderMethodStations();
+  if (restoredMethodSlide) {
+    restoreMethodSlide(restoredMethodSlide, false);
+  }
   renderTools();
   renderBars();
   bindInterface();
   initScrollExperience();
   setTool(0);
-  applyFocus("hero");
-  restoreMethodSlideFromUrl();
+  applyFocus(restoredMethodSlide ? "method" : "hero");
+  if (restoredMethodSlide) {
+    restoreMethodSlide(restoredMethodSlide, true);
+  }
 });
 
 window.addEventListener("load", () => {
@@ -201,7 +207,7 @@ function showMethodOverview(markCurrent = false) {
   showMethodSubSlide("method-overview");
 }
 
-function showMethodSubSlide(name) {
+function showMethodSubSlide(name, options = {}) {
   const current = document.querySelector(".method-subslide.is-active");
   const next = name === "method-overview"
     ? document.getElementById("methodOverview")
@@ -216,26 +222,36 @@ function showMethodSubSlide(name) {
   const activate = () => {
     document.querySelectorAll(".method-subslide").forEach((slide) => slide.classList.remove("is-active"));
     next.classList.add("is-active");
-    if (window.gsap) {
+    if (window.gsap && options.animate !== false) {
       gsap.fromTo(next, { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out" });
     }
   };
 
-  if (current && window.gsap) {
+  if (current && window.gsap && options.animate !== false) {
     gsap.to(current, { autoAlpha: 0, y: -18, duration: 0.28, ease: "power2.in", onComplete: activate });
   } else {
     activate();
   }
 }
 
-function restoreMethodSlideFromUrl() {
+function getMethodSlideFromUrl() {
   const params = new URLSearchParams(window.location.search);
   const hashParams = window.location.hash.startsWith("#method?")
     ? new URLSearchParams(window.location.hash.split("?")[1] || "")
     : null;
   const slide = params.get("slide");
   const fallbackSlide = hashParams?.get("slide");
-  const targetSlide = slide || fallbackSlide;
+  return slide || fallbackSlide || "";
+}
+
+function restoreMethodSlideFromUrl() {
+  const targetSlide = getMethodSlideFromUrl();
+  if (targetSlide) {
+    restoreMethodSlide(targetSlide, true);
+  }
+}
+
+function restoreMethodSlide(targetSlide, scrollToMethod) {
   if (!targetSlide || !document.getElementById(targetSlide)) return;
 
   window.sessionStorage.setItem("methodReturnSlide", targetSlide);
@@ -249,8 +265,10 @@ function restoreMethodSlideFromUrl() {
   }
 
   const restore = () => {
-    document.getElementById("method")?.scrollIntoView({ behavior: "auto", block: "start" });
-    showMethodSubSlide(targetSlide);
+    if (scrollToMethod) {
+      document.getElementById("method")?.scrollIntoView({ behavior: "auto", block: "start" });
+    }
+    showMethodSubSlide(targetSlide, { animate: false });
   };
 
   requestAnimationFrame(restore);
